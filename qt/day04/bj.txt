@@ -1,0 +1,171 @@
+
+
+++++++++++++++++++++++++++++++
+1.回顾
+2.反弹小球 
+3.setup绿色安装
+4.Editor - 文本编辑器 - QMainWindow
+5.DockWidget
+
+6.日期时间相关类 
+7.组合框 / 多行文本编辑器 
+8.右键菜单
+9.QListWidget
+
+10.MV结构 
+
+11.QT的多线程 
+12.线程同步 
+
+n.注意事项
+++++++++++++++++++++++++++++++
+
+
+++++++++++++++++++++++++++++++
+2.反弹小球 
+
+分析:
+
+
+项目 - 01_ReboundedBall 
+类名 - ReboundedBallDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.widget拖拽
+2.文本修改 
+3.布局 
+4.属性修改 
+	父窗口 
+		windowTitle - 反弹小球 
+		styleSheet - ... - 添加资源 - background-image - images - b.jpg - ok - ok 
+		添加背景 
+5.信号和槽 
+6.资源添加 
+
+逻辑设计:
+1.设置背景 
+2.绘制小球 
+	绘图事件 
+3.小球移动 
+	定时器事件 
+
+++++++++++++++++++++++++++++++
+
+
+++++++++++++++++++++++++++++++
+3.setup绿色安装
+++++++++++++++++++++++++++++++
+
+C:\Users\tarena\Desktop\QT\day04\01_ReboundedBall
+
+在release模式下, 重新构建项目 
+
+1.可视化:		打开Qt 5.12.8命令行 
+2.终端:		进入到项目目录下 
+			E: D: 
+			C:
+			cd C:\Users\tarena\Desktop\QT\day04\01_ReboundedBall
+
+			dir // ls
+			cls // clear
+
+3.终端:		md windeploy 
+4.终端:		cd windeploy 
+5.可视化:		将项目目录/debug  或者 项目目录/release 			
+			目录下的.exe文件拷贝到windeploy中
+6.终端:		windeployqt xxx.exe  
+7.可视化:		拷贝目录去其它目录下,可以直接执行
+
+ldd
+
+
+++++++++++++++++++++++++++++++
+4.Editor - 文本编辑器 - QMainWindow
+++++++++++++++++++++++++++++++
+
+总结:
+	QMainWindow
+	QAction 
+	信号和槽
+
+
+项目 - 02_Editor
+类名 - EditorWindow
+基类 - QMainWindow
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.资源添加 
+	QT资料\素材\Editor\images
+2.添加QAction
+	菜单栏 
+	工具栏 - 选中父窗口空白 - 右击 - 添加工具栏
+		选中工具栏 - ToolButtonStyle - ToolButtonTextUnderIcon
+3.widget拖拽
+	TextEdit - 
+4.文本修改 
+5.布局 
+6.属性修改 
+	父窗口 
+		windowTitle - 文本编辑器 
+		windowIcon - Normal Off - ... - images - 选中 - ok 
+	TextEdit 
+		objectname - m_edit 
+	m_actToolBar
+		checked - √
+	m_actStatusBar 
+		checked - √
+7.信号和槽 
+7.1.QAction的信号和槽 
+	信号 - triggered
+	类别1 - 
+		退出 - close()
+		剪切 / 复制 / 粘贴 / 清空 - m_edit控件提供功能
+	类别2 - 
+		新建 / 打开 / 关于 
+			triggered()
+		粗体 / 斜体 / 下划线 / 工具栏 / 状态栏  
+			triggered(bool)
+7.2.m_edit的信号和槽 
+	copyAvailable(bool) - 是否可以拷贝
+	textChanged() - 文本变化 
+	selectionChanged() - 选择变化 
+
+
+逻辑分析:
+1.QAction *QToolBar::addWidget(QWidget *widget)
+2.字号 
+	QSpinBox - 数字变化 - 
+	[signal] void QSpinBox::valueChanged(int i)
+		参数 - 字号 
+			通过该信号, 获取字号 
+3.字体 
+	[signal] void QComboBox::currentIndexChanged(const QString &text)
+		参数就是当前字体的字符串 
+		通过该信号,获取字体 
+4.是否隐藏 
+	[slot] void QWidget::setHidden(bool hidden)
+
+	void QTextCharFormat::setFontFamily(const QString &family)
+
+
+++++++++++++++++++++++++++++++
+5.Dock演示 
+++++++++++++++++++++++++++++++
+
+项目 - Dock
+类名 - DockWindow
+基类 - QMainWindow
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+windowTitle 
+	allowedAreas 
+	dockWidgetArea 

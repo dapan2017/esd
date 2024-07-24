@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ContexDialog</class>
+ <widget class="QDialog" name="ContexDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::CustomContextMenu</enum>
+  </property>
+  <property name="windowTitle">
+   <string>右键菜单</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="ContexMenu.qrc">
+    <normaloff>:/images/AppIcon.ico</normaloff>:/images/AppIcon.ico</iconset>
+  </property>
+  <action name="m_actAbout">
+   <property name="icon">
+    <iconset resource="ContexMenu.qrc">
+     <normaloff>:/images/AppIcon.ico</normaloff>:/images/AppIcon.ico</iconset>
+   </property>
+   <property name="text">
+    <string>关于...</string>
+   </property>
+   <property name="toolTip">
+    <string>关于...</string>
+   </property>
+  </action>
+  <action name="m_actExit">
+   <property name="icon">
+    <iconset resource="ContexMenu.qrc">
+     <normaloff>:/images/exit.bmp</normaloff>:/images/exit.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="toolTip">
+    <string>退出</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="ContexMenu.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_actExit</sender>
+   <signal>triggered()</signal>
+   <receiver>ContexDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

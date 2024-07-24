@@ -1,0 +1,282 @@
+
+++++++++++++++++++++++++++++++
+1.回顾
+2.使用Qtcreator构造加法计算器
+3.构造对话框
+4.事件机制
+n.注意事项
+++++++++++++++++++++++++++++++
+
+
+
+++++++++++++++++++++++++++++++
+1.回顾
+++++++++++++++++++++++++++++++
+1.Qt入门 
+2.Qt程序编辑 
+3.程序的编译，运行 
+4.父窗口 
+5.信号和槽 - 核心 
+6.Qt安装 
+7.qtcteator构建加法计算器 
+
+
+++++++++++++++++++++++++++++++
+2.使用Qtcreator构造加法计算器
+++++++++++++++++++++++++++++++
+
+构造一个类， 其中
+	QLineEdit, QLabel, QPushButton构造得到的对象成为了该类的成员
+后续， 只需要将新的类进行实例化， 就得到对应的界面程序 
+向对话框中拖拽控件，就是往构建的类中加入新的成员
+
+shadow build - 每次√划掉 
+
+05Calculator
+Base class - QDialog  
+class name - CauculatorDialog
+
+
+控件 - 输入和显示数字的控件？？
+
+1.UI设计 
+    问 - 哪个控件需要后续操作？ 
+    答 - 明确， 给该控件起名字
+三个lineEdit + 右对齐
+   第一个LineEdit - 
+		objectname ： m_editX
+   第二个LineEdit - 
+		objectname ： m_editY
+   第三个LineEdit - 
+		objectname ： m_editZ
+		readonly ：√
+pushbutton - 
+		objectname :   m_button
+	    text - = 
+		enabled ： √划掉 
+label - 
+		text : +
+
+2.逻辑设计 
+2.1.QLineEdit中只能输入数字 
+	QDoubleValidator
+2.2.左右输入框中都有有效数字， =按钮使能
+	左输入框有数据 - 如何得知？
+	[signal] void QLineEdit::textChanged(const QString &text)
+	左右操作数 - 有数据 - 在使能按钮函数中标记 
+	enableButton函数 判断 - 左右操作数是否是有效数字 
+
+	"1212" -> 1212 
+	QString 
+	
+
+2.3.点击按钮，求和， 将求和结果放到m_editZ中，显示 
+
+
+
+=号 - 点击 - 计算结果，放到m_editZ中
+槽函数 - 自定义
+信号 - 自定义
+信号已经定义， 槽函数自定义 - 
+
+左右操作数，都有有效数字 - 按钮使能
+自定义槽函数 
+
+uic - ui_calculatordialog.h
+
+setText(字符串） - 设置控件上的文本 
+
+CalculatorDialog* ui;
+
+ui->setupUi();
+
+
+double toDouble(bool *ok = nullptr) const
+ 字符串 -> double 
+ 成功 - 参数ok == 真 
+ 失败 - 参数ok == 假  
+ 返回值 - 转化得到的double数字 
+
+数字 -> 字符串 
+[static] QString QString::number(long/int/double/float/... n)
+ 数字 -> 字符串 
+ 参数 - 数字 
+ 返回值 - 字符串 
+
+获取控件上的文本 
+QString text() const
+返回值 - 返回控件上的文本(大多数控件) - 字符串
+			QLabel QPushButton QLineEdit ... 
+
+将文本信息放到控件上 
+void setText(const QString &)
+将参数对应的字符串放到对应的控件上(大多数控件)
+
+
+++++++++++++++++++++++++++++++
+3.构造对话框
+++++++++++++++++++++++++++++++
+
+项目 - 01_Login 
+类名 - LoginDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+用户名输入框:
+	objectname : m_editUsername
+密码输入框:
+	objectname : m_editPasswd
+	echoMode : Password
+按钮盒:
+	objectname : m_btnBox
+
+	点击ok - accepted信号 
+	点击cancel - rejected信号 
+
+
+
+
+
+++++++++++++++++++++++++++++++
+4.事件机制
+++++++++++++++++++++++++++++++
+
+Qt程序运行 - 循环等待事件到来 - 处理 
+点击按钮 - 事件
+
+事件的生成 - 用户/操作系统 和 用户界面产生了交互.
+点击键盘 鼠标单击 触摸屏幕 系统交互 - 检测到这个动作 - 将其转换为一个事件
+
+按键 - 事件 - 对象
+
+QObject 
+	- QWidget 
+		- QDialog
+		- QMainWindow 
+
+键盘 - QWidget - 
+[virtual protected] void QWidget::keyPressEvent(QKeyEvent *event)
+
+子类 - 
+void  keyPressEvent(...); 
+
+
+
+++++++++++++++++++++++++++++++
+5.定时器事件
+++++++++++++++++++++++++++++++
+
+项目 - 02_Timer
+类名 - TimerDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+ui设计:
+1.widget拖拽
+2.文本修改 
+3.布局 
+4.属性修改 
+	QLcdNumer
+		objectname : m_lcdHour
+		digitcount : 2
+	QLcdNumer
+		objectname : m_lcdMinute
+		digitcount : 2
+	QLcdNumer
+		objectname : m_lcdSecond
+		digitcount : 2
+	QLcdNumer
+		objectname : m_lcdElapsed
+		digitcount : 12
+	开始按钮 
+		objectname : m_btnStart
+		default    : √
+	复位按钮
+		objectname : m_btnReset
+5.信号和槽连接 
+	开始/复位按钮
+
+
+逻辑分析:
+1.定时器信号 
+	int start(int  n); 每隔n ms触发定时器信号 
+	void  timeout(); - 定时器触发的信号 
+
+	每隔1000ms触发timeout信号 - 调用函数显示当前时间
+1.1.timeout如何调用函数 
+	信号和槽
+1.2.显示当前时间
+	QTime
+
+2.定时器事件 
+  	计时器最开始显示全0 
+2.1.复位按钮 
+	让计时器全部归0 
+	让QTime的时分秒为全0 
+	bool QTime::setHMS(int h, int m, int s, int ms = 0)
+	QString QTime::toString(QStringView format) const
+		QTime转换为字符串 
+2.2.开始/暂停按钮 
+	每1ms加1, 加1后的值将之前的覆盖 
+	00:00:00.000 - 
+	00:00:00.001 - 
+	00:00:00.002
+
+	思路:
+		1.启动定时器事件, 每1ms触发一次定时器事件 
+			文本 - 开始, 点击按钮, 启动定时器 ; 文本变为暂停
+			文本 - 暂停, 点击按钮, 关闭定时器 ; 文本变为开始
+			https://www.lddgo.net/common/stopwatch
+
+		2.调用timerEvent函数
+		 	每次获取1ms后的值, 然后将新的数据写回到m_lcdElapsed中
+		 	QTime QTime::addMSecs(int ms) const
+
+
+
+1.n.
+类和函数:
+	[slot] void QLCDNumber::display(const QString &s)
+
+[static] QTime QTime::currentTime()
+获取当前时间  
+	返回 - QTime
+	static 
+
+QTime:
+	int hour() const
+	int minute() const
+	int second() const
+
+
+++++++++++++++++++++++++++++++
+n.注意事项
+++++++++++++++++++++++++++++++
+1.如果某个控件，后续操作， 修改其objectname
+2.基本需要修改的属性 
+	text - 控件上的文本
+	enabled - 是否使能，控件是否禁用 
+	readonly - 是否只读  
+    
+    对齐 - 水平方向 
+	alignment - 
+    font - 字体、字号  
+	
+3.做了一些修改， 构建 + 运行 - 保证保存好了
+4.控件上显示的文本都是字符串
+5.项目路径中禁止加中文字符
+6.访问其中的某个成员 
+	ui->成员名
+     ui->m_editX
+   	表示的是该成员的对象地址（指针）
+
+7.控件text的基本处理方法 
+	字符串 -> 数字  √
+	数字 -> 字符串  √
+	获取控件上的文本
+	如何将文本放到控件上 
+
+
+

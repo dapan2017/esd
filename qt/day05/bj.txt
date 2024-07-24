@@ -1,0 +1,210 @@
+
+
+++++++++++++++++++++++++++++++
+1.日期时间相关类 
+2.组合框 / 多行文本编辑器 
+3.右键菜单
+4.QListWidget
+
+5.MV结构 
+
+n.注意事项
+++++++++++++++++++++++++++++++
+
+
+++++++++++++++++++++++++++++++
+1.日期时间相关类 
+++++++++++++++++++++++++++++++
+
+DaTeTimeTest 项目
+Qt Console Application 
+
+
+项目 - DateTime 
+类名 - DateTimeDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.widget拖拽
+2.文本修改 
+3.布局 
+4.属性修改 
+	Date Edit
+		objectname - m_dateEdit
+		displayFormat - yyyy-MM-dd
+	QLine Edit
+		objectname - m_editDate
+	Time Edit
+		objectname - m_timeEdit
+		displayFormat - HH:mm:ss
+	QLine Edit
+		objectname - m_editTime
+	DateTime Edit:
+		objectname - m_datetimeEdit
+		displayFormat - yyyy-MM-dd HH:mm:ss
+	QLine Edit
+		objectname - m_editDateTime
+	pushbutton:
+		objectname - m_btnGet
+	pushbutton:
+		objectname - m_btnSet
+	QLineEdit:
+		objectname - m_editCalendar
+		readOnly - √
+		alignment - 水平居中 
+	Calendat:
+		objectname - m_calendar
+	
+5.信号和槽 
+	获取 / 设置 - clicked 
+	月份牌 - 
+6.资源添加 
+
+
+++++++++++++++++++++++++++++++
+2.组合框 / 多行文本编辑器 
+++++++++++++++++++++++++++++++
+
+列表项:
+	文本 + (QVariant数据)
+
+上海 
+天津
+北京 
+...
+
+
+
+
+
+项目 - ComboBox
+类名 - ComboBoxDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+添加资源 - 
+信号和槽:
+	1.所有按钮 
+		初始化 / 清空 / 添加 / 追加 / 擦除 - clicked 
+	2.所有check box 
+		可编辑 / 只读 - clicked(bool)
+	3.所有的combobox	
+		两个组合框 - currentIndexChanged(QString)
+
+
+逻辑分析:
+1.QIcon(const QString &fileName)
+
+[slot] void QComboBox::clear()
+
+void setEditable(bool editable)
+	设置可编辑属性 
+		真 - 可编辑
+		假 - 不可编辑 
+
+2.第二个ComboBox 
+	文本 + 不可见(QVariant数据)
+	QString + int 
+
+	QList<Key> QMap::keys() const
+
+
+QString QTextBlock::text() const
+
+
+
+++++++++++++++++++++++++++++++
+3.右键菜单
+++++++++++++++++++++++++++++++
+
+
+项目 - ContexMenu
+类名 - ContexMenuDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+添加资源 - ContexMenu - images 
+父窗口:
+	windowIcon
+	contexMenuPolicy - CustomContextMenu
+添加两个QAction:
+
+信号和槽:
+	关于  /  退出 
+
+
+	contexdialog.cpp:28:77: warning: unused parameter 'pos'
+
+
+
+
+++++++++++++++++++++++++++++++
+4.QListWidget
+++++++++++++++++++++++++++++++
+
+项目 - List
+类名 - ListWindow
+基类 - QMainWindow
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.添加资源 
+	Qt资源 / List / Images 
+2.构建个QAction
+3.属性修改 
+	左侧5个toolbutton:
+		1.
+			objectname - m_btnInit
+		2.
+			objectname - m_btnClear
+		3.
+			objectname - m_btnAddpend
+		4.
+			objectname - m_btnInsert
+		5.
+			objectname - m_btnDelete
+	右侧:
+		listwidget - 
+			objectname - m_list 
+		4个ToolButton - 
+		 	1 
+		 		objectname - m_btnCheckAll
+		 	2
+		 		objectname - m_btnCheckNone
+		 	3
+		 		objectname - m_btnCheckInverse
+		 	4
+		 		objectname - m_btnCheck
+		1个CheckBox 
+			m_checkEditable
+			文本 -可编辑 
+		多行文本框 
+			objectname - 名_editChanged
+			readOnly - √
+4.信号和槽的连接 
+	8个QAction - triggered() - 槽函数 
+	可编辑QAction - clicked(bool)
+	listwidget - 
+		currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+
+逻辑设计:
+1.
+   Qt::ItemFlags QListWidgetItem::flags() const
+   void QListWidgetItem::setFlags(Qt::ItemFlags flags)
+
+
+
+课后作业:
+	插入 / 添加 / 删除 / 
+
+
+int currentRow() const

@@ -1,0 +1,278 @@
+
+++++++++++++++++++++++++++++++
+1.回顾
+2.鼠标事件/键盘事件 
+	鼠标拖拽
+	键盘移动 
+3.绘图事件
+	图片浏览器 
+4.基本绘图 
+	矩形 / 图片背景 
+5.三个代码 
+	Shape - 各种基本图形 
+	Transform - 坐标系转换
+	Path 
+
+n.注意事项
+++++++++++++++++++++++++++++++
+
+
+
+++++++++++++++++++++++++++++++
+1.回顾
+++++++++++++++++++++++++++++++
+事件机制 
+
+
+
+
+++++++++++++++++++++++++++++++
+2.鼠标事件/键盘事件 
+++++++++++++++++++++++++++++++
+项目 - 01_Mouse 
+类名 - MouseDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.widget拖拽
+2.文本修改 
+3.布局 
+4.属性修改 
+	label - 
+		objectname - m_block
+		geometry - 
+		frame:
+			frameshape - winpanel 
+			frameshadow - raised (凸起的阴影效果)
+		palette : 
+			继承 - 改变调色板 - 快速 - 选中颜色 - ok - ok 
+		autofillbackground - √
+5.信号和槽连接 
+
+
+逻辑分析:
+1.mousePressEvent + MouseMoveEvent + MouseReleaseEvent
+2.左键点击, 鼠标点击的位置在label的区域中 
+	2.1.是否是左键点击 
+		参数 
+		Qt::MouseButton QMouseEvent::button() const
+	2.2.点击位置在label的区域中 
+		a.获取label的区域 
+			QRect frameRect() const
+
+		b.获取鼠标点击的位置 
+			QPoint QMouseEvent::pos() const
+
+			QPoint(int xpos, int ypos)
+				QPoint p(10, 20);
+3.滑块不要移出去  
+	
+	QSize size() const
+	QSize:
+		int height() const
+		int width() const
+
+
+	void setX(int x)
+	void setY(int y)
+	int x() const
+	int y() const
+
+	QPoint p(10, 20);
+		p.setX(30); // (30, 20)
+		p.setY(40); // (10, 40)
+	QPoint p(10, 20);
+		p.x(); // 10
+		p.y(); // 20
+
+
+打开已有项目 - 编译器 - shadow build 
+
+
+
+++++++++++++++++++++++++++++++
+2.双色球
+++++++++++++++++++++++++++++++
+项目 - 03_DualColoredBall 
+类名 - DualColoredBallDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.widget拖拽
+2.文本修改 
+3.布局 
+4.属性修改 
+	父窗口 - 
+		windowTitle - 双色球
+	红球label
+		objectname - m_labelRed
+		text - 0
+		alignment - 水平居中
+		font - 60
+		palette - 改变调色板 - windowText - 红色 - 各种ok
+	蓝球label
+		objectname - m_labelBlue
+		text - 0
+		alignment - 水平居中
+		font - 60 
+		palette - 改变调色板 - windowText - 蓝色 - 各种ok
+
+
+逻辑设计:
+1.红球:1-33的随机数 
+   蓝球 : 1-16的随机数 
+2.按下空格键 - 不断的切换数字 - 键盘事件 
+	按空格 - 切换 - 按空格 - 停止 - 按空格 - 切换 - ... 
+	停止状态 - 按 - 切换(启动了定时器) 
+	运行状态 - 按 - 停止(关闭了定时器)
+3.每100ms - 红球获取  
+	每500ms - 蓝球获取 
+	定时器事件
+	timerEvent
+  需要两个定时器 
+  	定时器1 - 100ms 
+  	定时器2 - 500ms 
+
+4.键盘事件 
+	判断是否是空格键 
+5.定时器事件 
+	两个定时器 - 触发定时器事件 - 调用同一个函数 - 如何区分呢?
+	答 - 通过定时器的id 
+	int QTimerEvent::timerId() const
+
+
+
+++++++++++++++++++++++++++++++
+3.绘图事件 - 图片浏览器 
+++++++++++++++++++++++++++++++
+
+项目 - 04_Pictures 
+类名 - PicturesDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+UI设计:
+1.widget拖拽
+2.文本修改 
+3.布局 
+4.属性修改 
+	QFrame : 
+		objectname - m_frmImage
+		sizepolicy - 垂直策略 - expanding
+	上一张按钮
+		objectname - m_btnPrev
+		text - 上一张
+	下一张按钮 
+		objectname - m_btnNext
+		text - 下一张 
+		default - √
+5.信号和槽连接 
+	上一张/下一张 - clicked - 槽函数 
+6.添加资源
+	位置 : QT资料\素材\Pictures\images
+	将images目录拷贝到项目目录下 (xxx.qrc)
+	右击项目名 - Add new... - Qt - Qt Resource File 
+	Location - 
+		名称 - 04_Pictures(项目名相同) - 下一步 - 完成 
+	Add prefix - 前缀 - /new/prefix1 修改为  / 
+	Add Files - 选中所有图片 - 打开 
+	资源添加完成了 
+	构建运行
+
+逻辑分析:
+1.上一张/下一张 - 切换图片
+2.显示图片 - 
+	将资源中的图片贴到QImage画布中
+	绘图事件 - paintEvent函数 
+
+3.QPainter
+	QPainter(QPaintDevice *device)
+
+	void drawImage(const QRect &rectangle, const QImage &image)
+		1.区域 
+		2.QImage对象
+4.字符串拼接 
+	":/images/" + "3" + ".jpg"
+	== 
+	":/images/3.jpg"
+
+++++++++++++++++++++++++++++++
+4.绘图事件 - 基本图形绘制 
+++++++++++++++++++++++++++++++
+
+QPainter
+	QPen QBrush QFont 
+
+
+项目 - 05_Paint 
+类名 - PaintDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+ui设计:
+添加素材:
+	QT资料\素材\Paint\images
+	将images拷贝到工程目录下 
+	添加素材
+	://images/1.png
+
+
+逻辑分析:
+1.void QPainter::drawRect(const QRect &rectangle)
+	QRect(const QPoint &topLeft, const QPoint &bottomRight);
+
+
+
+QPainter成员函数:
+	void drawPoint(const QPoint &position);
+
+	void drawLine(const QLine &line)
+	QLine(const QPoint &p1, const QPoint &p2)
+
+
+	void drawEllipse(const QRect &rectangle)
+
+
+	void drawArc(const QRect &rectangle, int startAngle, int spanAngle)
+
+	控制面板\外观和个性化\字体
+
+
+
+
+
+颜色 - RGB - RED / GREEN / BLUE
+		    0-255 0-255  0-255 
+
+		    QColor(255, 0, 0); // red 
+		    QColor(0, 0, 0); // 黑色
+		    QColor(255,255,255); // white
+
+
+
+++++++++++++++++++++++++++++++
+5.绘图事件 - 坐标转换
+++++++++++++++++++++++++++++++
+项目 - 06_Transform
+类名 - TransformDialog
+基类 - QDialog
+编译器 - MingGW 64-bit
+项目 - shadow build - √划掉
+
+
+	1 * (-1.5) = -1.5
+	-2 * (-1.5) = 3
+
+
+Path:
+	坐标系的转换 
+	drawPath - 绘制一些列简单绘图的组合

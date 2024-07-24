@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ComboBoxDialog</class>
+ <widget class="QDialog" name="ComboBoxDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>564</width>
+    <height>584</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>组合框和文本编辑框</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QGroupBox" name="groupBox">
+       <property name="title">
+        <string>简单分组框</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="m_btnInit">
+            <property name="text">
+             <string>初始化</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="m_btnClear">
+            <property name="text">
+             <string>清空</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="m_checkEditable">
+            <property name="text">
+             <string>可编辑</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QComboBox" name="m_comboSimple">
+          <item>
+           <property name="text">
+            <string>新建表项1</string>
+           </property>
+           <property name="icon">
+            <iconset resource="ComboBox.qrc">
+             <normaloff>:/images/aim.ico</normaloff>:/images/aim.ico</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>我是小神</string>
+           </property>
+           <property name="icon">
+            <iconset resource="ComboBox.qrc">
+             <normaloff>:/images/aim.ico</normaloff>:/images/aim.ico</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>我是大神</string>
+           </property>
+           <property name="icon">
+            <iconset resource="ComboBox.qrc">
+             <normaloff>:/images/aim.ico</normaloff>:/images/aim.ico</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_2">
+       <property name="title">
+        <string>用户数据分组框</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="m_btnAdd">
+          <property name="text">
+           <string>添加</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="m_comboUserData"/>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>文本编辑分组框</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="m_btnAppend">
+          <property name="text">
+           <string>追加</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="m_btnErase">
+          <property name="text">
+           <string>擦除</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="m_checkReadOnly">
+          <property name="text">
+           <string>只读</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QPlainTextEdit" name="m_plainTextEdit"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="ComboBox.qrc"/>
+ </resources>
+ <connections/>
+</ui>

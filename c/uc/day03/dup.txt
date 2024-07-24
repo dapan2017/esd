@@ -1,0 +1,2 @@
+newfd = 1
+hello linux!
