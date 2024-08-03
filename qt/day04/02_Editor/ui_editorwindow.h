@@ -11,7 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtGui/QIcon>
-#include <QtWidgets/QAction>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QMainWindow>

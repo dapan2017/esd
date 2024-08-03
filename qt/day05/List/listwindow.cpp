@@ -69,45 +69,105 @@ void ListWindow::on_m_actClear_triggered()
     ui->m_list->clear();
 }
 
-//
-void ListWindow::on_m_actInsert_triggered()
-{
-
-}
-
-void ListWindow::on_m_actDelete_triggered()
-{
-
-}
-
+// 添加项
 void ListWindow::on_m_actAppend_triggered()
 {
+    QListWidgetItem* item = new QListWidgetItem(
+                QIcon(":/images/check.ico"), "添加列表项");
+    item->setCheckState(Qt::Checked);
+    if(ui->m_checkEditable->isChecked()) // 可编辑被选中
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
 
+    ui->m_list->addItem(item);
 }
 
+// 插入列表项
+void ListWindow::on_m_actInsert_triggered()
+{
+    QListWidgetItem* item = new QListWidgetItem(
+                QIcon(":/images/check.ico"), "插入列表项");
+    item->setCheckState(Qt::Checked);
+    if(ui->m_checkEditable->isChecked()) // 可编辑被选中
+        item->setFlags(item->flags() | Qt::ItemIsEditable);
+
+    ui->m_list->insertItem(ui->m_list->currentRow(), item);
+
+}
+// 删除列表项
+// 删除当前行
+void ListWindow::on_m_actDelete_triggered()
+{
+    delete ui->m_list->takeItem(ui->m_list->currentRow());
+}
+
+// 全选
 void ListWindow::on_m_actCheckAll_triggered()
 {
+    // 1.遍历所有的列表项, 将每个列表项设置为checked
+    // 获取列表项个数
+    int cnt = ui->m_list->count();
 
+    for(int i = 0; i < cnt; i++)
+        ui->m_list->item(i)->setCheckState(Qt::Checked);
 }
 
+// 全不选
 void ListWindow::on_m_actCheckNone_triggered()
 {
+    // 1.遍历所有的列表项, 将每个列表项设置为unchecked
+    // 获取列表项个数
+    int cnt = ui->m_list->count();
 
+    for(int i = 0; i < cnt; i++)
+        ui->m_list->item(i)->setCheckState(Qt::Unchecked);
 }
-
+// 反选
 void ListWindow::on_m_actCheckInverse_triggered()
 {
+    // 1.遍历所有的列表项, 将每个列表项设置为相反的状态
+    // 获取列表项个数
+    int cnt = ui->m_list->count();
 
+    // 获取编号为i的列表项状态 ui->m_list->item(i)->checkState()
+    for(int i = 0; i < cnt; i++)
+        ui->m_list->item(i)->setCheckState(
+            ui->m_list->item(i)->checkState() == Qt::Checked ?
+                        Qt::Unchecked : Qt::Checked);
 }
 
+// checkec, 真, 全部可编辑; 假, 都不能编辑
 void ListWindow::on_m_checkEditable_clicked(bool checked)
 {
+    int cnt = ui->m_list->count();
 
+    for(int i = 0; i < cnt; i++){
+        QListWidgetItem* item = ui->m_list->item(i);
+
+        if(checked)
+            item->setFlags(item->flags() | Qt::ItemIsEditable);
+        else
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
+    }
 }
 
+// current - 当前选中的列表项
+// previous -上一个选中的列表项
+// 每次选择的内容发生改变 - 改变的文本获取,放到多行文本框中
 void ListWindow::on_m_list_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
+    QString str = "[";
 
+    if(previous)
+        str += previous->text(); // 上一项的文本
+
+    str += "]->[";
+
+    if(current)
+        str += current->text();
+
+    str += "]";
+
+    ui->m_editChanged->appendPlainText(str);
 }
 
 

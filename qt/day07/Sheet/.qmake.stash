@@ -1,0 +1,39 @@
+QMAKE_CXX.QT_COMPILER_STDCXX = 201402L
+QMAKE_CXX.QMAKE_GCC_MAJOR_VERSION = 7
+QMAKE_CXX.QMAKE_GCC_MINOR_VERSION = 3
+QMAKE_CXX.QMAKE_GCC_PATCH_VERSION = 0
+QMAKE_CXX.COMPILER_MACROS = \
+    QT_COMPILER_STDCXX \
+    QMAKE_GCC_MAJOR_VERSION \
+    QMAKE_GCC_MINOR_VERSION \
+    QMAKE_GCC_PATCH_VERSION
+QMAKE_CXX.INCDIRS = \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++ \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/x86_64-w64-mingw32 \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include/c++/backward \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0/include-fixed \
+    E:/software/Qt/Tools/mingw730_64/x86_64-w64-mingw32/include
+QMAKE_CXX.LIBDIRS = \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc/x86_64-w64-mingw32/7.3.0 \
+    E:/software/Qt/Tools/mingw730_64/lib/gcc \
+    E:/software/Qt/Tools/mingw730_64/x86_64-w64-mingw32/lib \
+    E:/software/Qt/Tools/mingw730_64/lib
+QMAKE_MAC_SDK.macosx.Path = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+QMAKE_MAC_SDK.macosx.SDKVersion = 14.4
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CC = /Library/Developer/CommandLineTools/usr/bin/clang
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_CXX = /Library/Developer/CommandLineTools/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_FIX_RPATH = \
+    /Library/Developer/CommandLineTools/usr/bin/install_name_tool \
+    -id
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_AR = \
+    /Library/Developer/CommandLineTools/usr/bin/ar \
+    cq
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_RANLIB = \
+    /Library/Developer/CommandLineTools/usr/bin/ranlib \
+    -s
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK = /Library/Developer/CommandLineTools/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK_SHLIB = /Library/Developer/CommandLineTools/usr/bin/clang++
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK_C = /Library/Developer/CommandLineTools/usr/bin/clang
+QMAKE_MAC_SDK.macx-clang.macosx.QMAKE_LINK_C_SHLIB = /Library/Developer/CommandLineTools/usr/bin/clang
+QMAKE_XCODE_DEVELOPER_PATH = /Library/Developer/CommandLineTools

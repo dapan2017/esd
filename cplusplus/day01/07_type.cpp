@@ -33,13 +33,13 @@ void testEnum() {
 }
 void testBool() {
     bool a = ""; // "fdsfds"; // 0.00000000001; // 123; // true;
-    bool b = NULL;       // 0.00000000000;// 0;   // false;
+    bool b = false;       // 0.00000000000;// 0;   // false;
     cout << "a=" << a << ", b=" << b << endl;
 }
 int main( void ) {
     testBool( );
-//  testEnum( );
-//  testUnion( );
+    testEnum( );
+ testUnion( );
 //  testStruct( );
     return 0;
 }

@@ -63,10 +63,12 @@ int main( void ) {
     Human h4;
     cout << "h4被赋值前--";
     h4.getinfo();
-    (h4 = h3) = h; // h4.operator=(h3)->触发拷贝赋值函数
+    h4 = h3; // h4.operator=(h3)->触发拷贝赋值函数
     cout << "h4被赋值后--";
     h4.getinfo();
 
+    Human h5 = h4;
+    h5.getinfo();
     return 0;
 }
 

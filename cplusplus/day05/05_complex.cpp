@@ -28,6 +28,7 @@ int main( void ) {
     Human a(22,"张飞"), b(20,"赵云"), c(25,"关羽"), d(32,"马超");
 
     Human res = a + b; // ==> a.operator+(b) 或 operator+(a,b)
+    
     res.getinfo();
 
     res = c - d; // ==> c.operator-(d) 或 operator-(c,d)

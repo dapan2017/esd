@@ -1,0 +1,10 @@
+release/celldialog.o
+release/headerdialog.o
+release/main.o
+release/rowcoldialog.o
+release/sheetwindow.o
+release/qrc_Sheet.o
+release/moc_celldialog.o
+release/moc_headerdialog.o
+release/moc_rowcoldialog.o
+release/moc_sheetwindow.o

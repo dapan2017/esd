@@ -1,0 +1,10 @@
+debug/celldialog.o
+debug/headerdialog.o
+debug/main.o
+debug/rowcoldialog.o
+debug/sheetwindow.o
+debug/qrc_Sheet.o
+debug/moc_celldialog.o
+debug/moc_headerdialog.o
+debug/moc_rowcoldialog.o
+debug/moc_sheetwindow.o

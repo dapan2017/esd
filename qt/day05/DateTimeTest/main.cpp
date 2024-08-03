@@ -8,6 +8,8 @@ int main(int argc, char *argv[])
 
     // 序列化
     QDateTime dateTime = QDateTime::currentDateTime();
+    qDebug() << dateTime.date().year() << dateTime.date().month() << dateTime.date().day();
+
     QString str = dateTime.toString("yyyy-MM-dd hh:mm:ss.zzz");
     qDebug() << str;
 
@@ -15,9 +17,9 @@ int main(int argc, char *argv[])
     str = "2024-07-26 18:00:00";
     dateTime = QDateTime::fromString(str, "yyyy-MM-dd HH:mm:ss");
     // 年月日
-    qDebug() << dateTime.date().year();
-    qDebug() << dateTime.date().month();
-    qDebug() << dateTime.date().day();
+
+    // qDebug() </*< ;
+    // qDebug() << ;*/
     // 时分秒
     qDebug() << dateTime.time().hour();
     qDebug() << dateTime.time().minute();

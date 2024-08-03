@@ -6,20 +6,24 @@ void Swap( int& x, int& y ) { // 非常引用型形参:函数内部可以修改�
     int z = x;
     x = y;
     y = z;
+    cout << "&" << endl;
 }
 void Swap( int* x, int* y ) {
     int z = *x;
     *x = *y;
     *y = z;
+    cout << "*" << endl;
 }
 void Print( const int& x, const int& y ) { // 常引用型形参
-//  x = 888;
+    // x = 888;
     cout << x << ' ' << y << endl;
 }
 int main( void ) {
     int a=10, b=20;
     Swap(a,b);
 //  Swap(&a, &b);
+    cout << "a=" << a << ", b=" << b << endl;
+     Swap(&a, &b);
     cout << "a=" << a << ", b=" << b << endl;
     Print( a, b );
     Print( 666,999 );

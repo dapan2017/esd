@@ -10,7 +10,7 @@
 #define UI_LISTWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
+#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QHBoxLayout>

@@ -29,12 +29,12 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>210</width>
-          <height>451</height>
+          <width>196</width>
+          <height>454</height>
          </rect>
         </property>
         <attribute name="icon">
-         <iconset resource="List.qrc">
+         <iconset>
           <normaloff>:/images/page1.bmp</normaloff>:/images/page1.bmp</iconset>
         </attribute>
         <attribute name="label">
@@ -128,12 +128,12 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>210</width>
-          <height>451</height>
+          <width>196</width>
+          <height>454</height>
          </rect>
         </property>
         <attribute name="icon">
-         <iconset resource="List.qrc">
+         <iconset>
           <normaloff>:/images/page2.bmp</normaloff>:/images/page2.bmp</iconset>
         </attribute>
         <attribute name="label">
@@ -145,12 +145,12 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>210</width>
-          <height>451</height>
+          <width>196</width>
+          <height>454</height>
          </rect>
         </property>
         <attribute name="icon">
-         <iconset resource="List.qrc">
+         <iconset>
           <normaloff>:/images/page3.bmp</normaloff>:/images/page3.bmp</iconset>
         </attribute>
         <attribute name="label">
@@ -164,7 +164,7 @@
        </property>
        <widget class="QWidget" name="tab">
         <attribute name="icon">
-         <iconset resource="List.qrc">
+         <iconset>
           <normaloff>:/images/page1.bmp</normaloff>:/images/page1.bmp</iconset>
         </attribute>
         <attribute name="title">
@@ -273,7 +273,7 @@
        </widget>
        <widget class="QWidget" name="tab_2">
         <attribute name="icon">
-         <iconset resource="List.qrc">
+         <iconset>
           <normaloff>:/images/page2.bmp</normaloff>:/images/page2.bmp</iconset>
         </attribute>
         <attribute name="title">
@@ -282,7 +282,7 @@
        </widget>
        <widget class="QWidget" name="tab_3">
         <attribute name="icon">
-         <iconset resource="List.qrc">
+         <iconset>
           <normaloff>:/images/page3.bmp</normaloff>:/images/page3.bmp</iconset>
         </attribute>
         <attribute name="title">
@@ -316,7 +316,7 @@
   </widget>
   <action name="m_actInit">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/init.bmp</normaloff>:/images/init.bmp</iconset>
    </property>
    <property name="text">
@@ -325,7 +325,7 @@
   </action>
   <action name="m_actClear">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/clear.bmp</normaloff>:/images/clear.bmp</iconset>
    </property>
    <property name="text">
@@ -337,7 +337,7 @@
   </action>
   <action name="m_actAppend">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/append.bmp</normaloff>:/images/append.bmp</iconset>
    </property>
    <property name="text">
@@ -349,7 +349,7 @@
   </action>
   <action name="m_actInsert">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/insert.bmp</normaloff>:/images/insert.bmp</iconset>
    </property>
    <property name="text">
@@ -361,7 +361,7 @@
   </action>
   <action name="m_actDelete">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/delete.bmp</normaloff>:/images/delete.bmp</iconset>
    </property>
    <property name="text">
@@ -397,7 +397,7 @@
   </action>
   <action name="m_actCheck">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/item.bmp</normaloff>:/images/item.bmp</iconset>
    </property>
    <property name="text">
@@ -409,7 +409,7 @@
   </action>
   <action name="m_actExit">
    <property name="icon">
-    <iconset resource="List.qrc">
+    <iconset>
      <normaloff>:/images/exit.bmp</normaloff>:/images/exit.bmp</iconset>
    </property>
    <property name="text">
@@ -420,9 +420,7 @@
    </property>
   </action>
  </widget>
- <resources>
-  <include location="List.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>m_actExit</sender>

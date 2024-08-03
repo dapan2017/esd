@@ -9,8 +9,9 @@ int main( void ) {
     p = &b; // 指针的目标内存可以随意变更
 
     int& r = a; // 引用必须初始化
+    cout << r << endl;
     r = b; // 这句代码不会变更 r 所引用的目标内存
-
+    cout << r << endl;
     int** ppa = &p; // 存在二级指针
 //  int&& rra = r; // 不存在二级引用
 
