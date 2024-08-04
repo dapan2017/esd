@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TcpClientWindow</class>
+ <widget class="QMainWindow" name="TcpClientWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>696</width>
+    <height>557</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TCP客户机</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>远程地址：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="m_editRemoteAddr"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>远程端口：</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="m_editRemotePort"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPlainTextEdit" name="m_editOutput">
+      <property name="frameShape">
+       <enum>QFrame::WinPanel</enum>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="m_editSend"/>
+      </item>
+      <item>
+       <widget class="QPushButton" name="m_btnSend">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>发送</string>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="m_actConnect"/>
+   <addaction name="m_actDisconnect"/>
+   <addaction name="m_actClear"/>
+   <addaction name="separator"/>
+   <addaction name="m_actExit"/>
+  </widget>
+  <action name="m_actConnect">
+   <property name="icon">
+    <iconset resource="TcpClient.qrc">
+     <normaloff>:/images/connect.bmp</normaloff>:/images/connect.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>连接</string>
+   </property>
+   <property name="toolTip">
+    <string>连接</string>
+   </property>
+  </action>
+  <action name="m_actDisconnect">
+   <property name="icon">
+    <iconset resource="TcpClient.qrc">
+     <normaloff>:/images/disconnect.bmp</normaloff>:/images/disconnect.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>断开</string>
+   </property>
+   <property name="toolTip">
+    <string>断开</string>
+   </property>
+  </action>
+  <action name="m_actClear">
+   <property name="icon">
+    <iconset resource="TcpClient.qrc">
+     <normaloff>:/images/clear.bmp</normaloff>:/images/clear.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>清空</string>
+   </property>
+   <property name="toolTip">
+    <string>清空</string>
+   </property>
+  </action>
+  <action name="m_actExit">
+   <property name="icon">
+    <iconset resource="TcpClient.qrc">
+     <normaloff>:/images/exit.bmp</normaloff>:/images/exit.bmp</iconset>
+   </property>
+   <property name="text">
+    <string>退出</string>
+   </property>
+   <property name="toolTip">
+    <string>退出</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="TcpClient.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>m_actExit</sender>
+   <signal>triggered()</signal>
+   <receiver>TcpClientWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>278</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
