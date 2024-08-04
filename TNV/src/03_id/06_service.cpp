@@ -149,8 +149,8 @@ bool service_c::id(acl::socket_stream* conn, long value) const {
     // 构造响应
     long long bodylen = BODYLEN_SIZE;
     long long resplen = HEADLEN + bodylen;
-    // char resp[resplen] = {};
-    char* resp = new char[resplen];
+    char resp[resplen] = {};
+    // char* resp = new char[resplen];
     llton(bodylen, resp);
     resp[BODYLEN_SIZE] = CMD_ID_REPLY;
     resp[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -162,7 +162,7 @@ bool service_c::id(acl::socket_stream* conn, long value) const {
             acl::last_serror(), resplen, conn->get_peer());
         return false;
     }
-    delete[] resp;
+    // delete[] resp;
     return true;
 }
 
