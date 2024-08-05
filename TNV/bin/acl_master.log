@@ -4,3 +4,6 @@
 2024/08/03 23:22:38 demo (pid=26562)(info): log_event_mode(939): use kernel_event
 2024/08/03 23:22:38 demo (pid=26562)(info): 08_server.cpp(32), proc_on_init: cfg_maddrs: 127.0.0.1, cfg_mtimeout: 30, cfg_maxoffset: 100
 2024/08/03 23:22:38 demo (pid=26562)(info): acl_threads_server_main(1660), demo daemon started, log: acl_master.log
+2024/08/04 10:29:00 demo (pid=77015)(info): log_event_mode(939): use kernel_event
+2024/08/04 10:29:00 demo (pid=77015)(info): 12_server.cpp(68), proc_on_init: cfg_appids: tnvideo, cfg_maddrs: 127.0.0.1, cfg_raddrs: 127.0.0.1:6379, cfg_interval: 120, cfg_mtimeout: 30, cfg_maxconns: 600, cfg_ctimeout: 10, cfg_rtimeout: 10, cfg_ktimeout: 60
+2024/08/04 10:29:00 demo (pid=77015)(info): acl_threads_server_main(1660), demo daemon started, log: acl_master.log
