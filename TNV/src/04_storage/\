@@ -362,66 +362,17 @@ int service_c::genpath(char* filepath) const {
 
 // 将ID转换为512进制
 long service_c::id512(long id) const {
-    long result = 0;
-
-    for (int i = 1; id; i *= 1000) {
-        result += (id % 512) * i;
-        id /= 512;
-    }
-
-    return result;
 }
 
 // 用文件ID生成文件路径
 int service_c::id2path(char const* spath, long fileid,
     char* filepath) const {
-    // 检查存储路径
-    if (!spath || !*spath) {
-        logger_error("storage path is null");
-        return ERROR;
-    }
-
-    // 生成文件路径中的各个分量
-    unsigned short subdir1 = (fileid / 1000000000) % 1000; // 一级子目录
-    unsigned short subdir2 = (fileid / 1000000) % 1000;    // 二级子目录
-    unsigned short subdir3 = (fileid / 1000) % 1000;       // 三级子目录
-    time_t         curtime = time(NULL);                   // 当前时间戳
-    unsigned short postfix = (fileid / 1) % 1000;          // 文件名后缀
-
-    // 格式化完整的文件路径
-    if (spath[strlen(spath)-1] == '/')
-        snprintf(filepath, PATH_MAX + 1, "%s%03X/%03X/%03X/%lX_%03X",
-            spath, subdir1, subdir2, subdir3, curtime, postfix);
-    else
-        snprintf(filepath, PATH_MAX + 1, "%s/%03X/%03X/%03X/%lX_%03X",
-            spath, subdir1, subdir2, subdir3, curtime, postfix);
-
-    return OK;
 }
 
 // 接收并保存文件
 int service_c::save(acl::socket_stream* conn, char const* appid,
     char const* userid, char const* fileid, long long filesize,
     char const* filepath) const {
-    // 文件操作对象
-
-    // 打开文件
-
-    // 依次将接收到的数据块写入文件
-    // 未接收字节数
-    // 接收写入缓冲区
-    // 还有未接收数据
-        // 接收数据
-        // 写入文件
-        // 未收递减
-
-    // 关闭文件
-
-    // 数据库访问对象
-
-    // 连接数据库
-    
-    // 设置文件ID和路径及大小的对应关系
 }
 
 // 读取并发送文件

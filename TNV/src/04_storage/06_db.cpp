@@ -105,41 +105,90 @@ int db_c::get(char const* appid, char const* userid, char const* fileid,
 // 设置文件ID和路径及大小的对应关系
 int db_c::set(char const* appid, char const* userid, char const* fileid,
     char const* filepath, long long filesize) const {
+    // 根据用户ID获取其对应的表名
+    std::string tablename = table_of_user(userid);
+    if (tablename.empty()) {
+        logger_error("tablename is empty, appid: %s, "
+            "userid: %s, fileid: %s", appid, userid, fileid);
+        return ERROR;
+    }
+
+    // 插入一条记录
     acl::string sql;
-    sql.format("INSERT INTO %d SET id = '%s',appid ='%s',"
-        "userid='%s',status = 0, file_path = '%s',file_size=%lld;",
-        tablename.c_str(),fileid,appid,eusrid,filepath,filesize);
-    MYSQL_RES* res=mysql_store_result(m_mysql);
-    if(!res && mysql_store_result(m_mysql)){
-        logger_error("insert database fail:%s")
-    }    
+    sql.format("INSERT INTO %s SET id='%s', appid='%s', "
+        "userid='%s', status=0, file_path='%s', file_size=%lld;",
+        tablename.c_str(), fileid, appid, userid, filepath, filesize);
+    if (mysql_query(m_mysql, sql.c_str())) {
+        logger_error("insert database fail: %s, sql: %s",
+            mysql_error(m_mysql), sql.c_str());
+        return ERROR;
+    }
+
+    // 检查插入结果
+    MYSQL_RES* res = mysql_store_result(m_mysql);
+    if (!res && mysql_field_count(m_mysql)) {
+        logger_error("insert database fail: %s, sql: %s",
+            mysql_error(m_mysql), sql.c_str());
+        return ERROR;
+    }
+
+    return OK;
 }
 
 // 删除文件ID
 int db_c::del(char const* appid, char const* userid,
     char const* fileid) const {
-    //先从缓存中删除文件ID
+    // 先从缓存中删除文件ID
     cache_c cache;
     acl::string key;
     key.format("uid:fid:%s:%s", userid, fileid);
-    if(cache.del(key) != OK)
-        logger_warn("delete cache fail: appid:%s,"
-            "userid:%s,fileid:%s",appid,userid,fileid);
-        return ERROR;
-    //再从数据库中删除文件
+    if (cache.del(key) != OK)
+        logger_warn("delete cache fail: appid: %s, "
+            "userid: %s, fileid: %s", appid, userid, fileid);
 
-    //检查删除结果
+    // 再从数据库中删除文件ID
+    std::string tablename = table_of_user(userid);
+    if (tablename.empty()) {
+        logger_error("tablename is empty, appid: %s, "
+            "userid: %s, fileid: %s", appid, userid, fileid);
+        return ERROR;
+    }
+    acl::string sql;
+    sql.format("DELETE FROM %s WHERE id='%s';",
+        tablename.c_str(), fileid);
+    if (mysql_query(m_mysql, sql.c_str())) {
+        logger_error("delete database fail: %s, sql: %s",
+            mysql_error(m_mysql), sql.c_str());
+        return ERROR;
+    }
+
+    // 检查删除结果
+    MYSQL_RES* res = mysql_store_result(m_mysql);
+    if (!res && mysql_field_count(m_mysql)) {
+        logger_error("delete database fail: %s, sql: %s",
+            mysql_error(m_mysql), sql.c_str());
+        return ERROR;
+    }
+
+    return OK;
 }
 
 // 根据用户ID获取其对应的表名
 std::string db_c::table_of_user(char const* userid) const {
     char tablename[10];
-    sprintf(tablename,"t_file_%02d",
-        (hash(userid,strlen(userid)) & 0x7FFFFFF)%3+1);
-    
+
+    sprintf(tablename, "t_file_%02d",
+        (hash(userid, strlen(userid)) & 0x7FFFFFFF) % 3 + 1);
+
     return tablename;
 }
 
 // 计算哈希值
 unsigned int db_c::hash(char const* buf, size_t len) const {
+    unsigned int h = 0;
+
+    for (size_t i = 0; i < len; ++i)
+        h ^= i&1 ? ~(h<<11^buf[i]^h>>5) : h<<7^buf[i]^h>>3;
+
+    return h;
 }
