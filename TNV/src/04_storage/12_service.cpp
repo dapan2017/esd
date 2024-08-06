@@ -404,10 +404,31 @@ int service_c::save(acl::socket_stream* conn, char const* appid,
     char const* userid, char const* fileid, long long filesize,
     char const* filepath) const {
     // 文件操作对象
-
+    file_c file;
+    
     // 打开文件
-
+    if(file.open(filepath,path_c::OWRITE)!=OK)
+        return ERROR;
     // 依次将接收到的数据块写入文件
+    long long remain = filesize;
+    char rcvwr[STORAGE_RCVWR_SIZE];
+    while(remain){
+        long long bytes = std::min(remain,sizeof(rcvwr);
+        long long count = conn->read(rcvwr,bytes);
+        if(count < 0){
+            logger_error("read fail:%s,bytes:%lld,from:%s",
+                acl::last_serror(),bytes,conn->get_peer());
+            file.close();
+            return SOCKET_ERROR;
+        }
+        if(file.write(rcvwr,count)!=OK){
+            file.close();
+            return ERROR;
+        }
+        remain -= count;
+
+    }
+    file.close();
     // 未接收字节数
     // 接收写入缓冲区
     // 还有未接收数据
@@ -418,6 +439,13 @@ int service_c::save(acl::socket_stream* conn, char const* appid,
     // 关闭文件
 
     // 数据库访问对象
+    db_c db;
+    if(db.connect()!=OK){
+        file.del(filepath);
+        return ERROR;
+    }
+
+    
 
     // 连接数据库
     
