@@ -1,21 +1,44 @@
-// 跟踪服务器
+// 存储服务器
 // 实现服务器类
 //
 #include <unistd.h>
 #include "02_proto.h"
 #include "03_util.h"
 #include "01_globals.h"
-#include "07_service.h"
-#include "11_server.h"
+#include "11_service.h"
+#include "15_server.h"
 
 // 进程启动时被调用
 void server_c::proc_on_init(void) {
-    // 应用ID表
-    if (!cfg_appids || !*cfg_appids)
-        logger_fatal("application ids is null");
-    split(cfg_appids, g_appids);
-    if (g_appids.empty())
-        logger_fatal("application ids is empty");
+    // 隶属组名
+    if (strlen(cfg_gpname) > STORAGE_GROUPNAME_MAX)
+        logger_fatal("groupname too big %lu > %d",
+            strlen(cfg_gpname), STORAGE_GROUPNAME_MAX);
+
+    // 绑定端口号
+    if (cfg_bindport <= 0)
+        logger_fatal("invalid bind port %d <= 0", cfg_bindport);
+
+    // 存储路径表
+    if (!cfg_spaths || !*cfg_spaths)
+        logger_fatal("storage paths is null");
+    split(cfg_spaths, g_spaths);
+    if (g_spaths.empty())
+        logger_fatal("storage paths is empty");
+
+    // 跟踪服务器地址表
+    if (!cfg_taddrs || !*cfg_taddrs)
+        logger_fatal("tracker addresses is null");
+    split(cfg_taddrs, g_taddrs);
+    if (g_taddrs.empty())
+        logger_fatal("tracker addresses is empty");
+
+    // ID服务器地址表
+    if (!cfg_iaddrs || !*cfg_iaddrs)
+        logger_fatal("id addresses is null");
+    split(cfg_iaddrs, g_iaddrs);
+    if (g_iaddrs.empty())
+        logger_fatal("id addresses is empty");
 
     // MySQL地址表
     if (!cfg_maddrs || !*cfg_maddrs)
@@ -53,19 +76,29 @@ void server_c::proc_on_init(void) {
         logger_error("call gethostname fail: %s", strerror(errno));
     g_hostname = hostname;
 
-    // 创建并启动存储服务器状态检查线程
-    if ((m_status = new status_c)) {
-        m_status->set_detachable(false);
-        m_status->start();
+    // 启动时间
+    g_stime = time(NULL);
+
+    // 创建并启动连接每台跟踪服务器的客户机线程
+    for (std::vector<std::string>::const_iterator taddr = g_taddrs.begin();
+        taddr != g_taddrs.end(); ++taddr) {
+        tracker_c* tracker = new tracker_c(taddr->c_str());
+        tracker->set_detachable(false);
+        tracker->start();
+        m_trackers.push_back(tracker);
     }
 
     // 打印配置信息
-    logger("cfg_appids: %s, cfg_maddrs: %s, cfg_raddrs: %s, "
-        "cfg_interval: %d, cfg_mtimeout: %d, cfg_maxconns: %d, "
-        "cfg_ctimeout: %d, cfg_rtimeout: %d, cfg_ktimeout: %d",
-        cfg_appids, cfg_maddrs, cfg_raddrs,
-        cfg_interval, cfg_mtimeout, cfg_maxconns,
-        cfg_ctimeout, cfg_rtimeout, cfg_ktimeout);
+    logger("cfg_gpname: %s, cfg_spaths: %s, cfg_taddrs: %s, "
+        "cfg_iaddrs: %s, cfg_maddrs: %s, cfg_raddrs: %s, "
+        "cfg_bindport: %d, cfg_interval: %d, cfg_mtimeout: %d, "
+        "cfg_maxconns: %d, cfg_ctimeout: %d, cfg_rtimeout: %d, "
+        "cfg_ktimeout: %d",
+        cfg_gpname, cfg_spaths, cfg_taddrs,
+        cfg_iaddrs, cfg_maddrs, cfg_raddrs,
+        cfg_bindport, cfg_interval, cfg_mtimeout,
+        cfg_maxconns, cfg_ctimeout, cfg_rtimeout,
+        cfg_ktimeout);
 }
 
 // 进程意图退出时被调用
@@ -73,8 +106,10 @@ void server_c::proc_on_init(void) {
 // 若配置项ioctl_quick_abort非0，进程立即退出，否则
 // 待所有客户机连接都关闭后再退出
 bool server_c::proc_exit_timer(size_t nclients, size_t nthreads) {
-    // 终止存储服务器状态检查线程
-    m_status->stop();
+    for (std::list<tracker_c*>::iterator tracker = m_trackers.begin();
+        tracker != m_trackers.end(); ++tracker)
+        // 终止跟踪客户机线程
+        (*tracker)->stop();
 
     if (!nclients || !nthreads) {
         logger("nclient: %lu, nthreads: %lu", nclients, nthreads);
@@ -86,15 +121,16 @@ bool server_c::proc_exit_timer(size_t nclients, size_t nthreads) {
 
 // 进程即将退出是被调用
 void server_c::proc_on_exit(void) {
-    // 回收存储服务器状态检查线程
-    if (!m_status->wait(NULL))
-        logger_error("wait thread #%lu fail", m_status->thread_id());
-
-    // 销毁存储服务器状态检查线程
-    if (m_status) {
-        delete m_status;
-        m_status = NULL;
+    for (std::list<tracker_c*>::iterator tracker = m_trackers.begin();
+        tracker != m_trackers.end(); ++tracker) {
+        // 回收跟踪客户机线程
+        if (!(*tracker)->wait(NULL))
+            logger_error("wait thread #%lu fail", (*tracker)->thread_id());
+        // 销毁跟踪客户机线程
+        delete *tracker;
     }
+
+    m_trackers.clear();
 
     // 销毁Redis连接池
     if (g_rconns) {

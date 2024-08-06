@@ -1,10 +1,11 @@
-// 跟踪服务器
+// 存储服务器
 // 声明服务器类
 //
 #pragma once
 
+#include <list>
 #include <lib_acl.hpp>
-#include "09_status.h"
+#include "13_tracker.h"
 //
 // 服务器类
 //
@@ -31,5 +32,5 @@ protected:
     void thread_on_close(acl::socket_stream* conn);
 
 private:
-    status_c* m_status; // 存储服务器状态检查线程
+    std::list<tracker_c*> m_trackers; // 跟踪客户机线程集
 };

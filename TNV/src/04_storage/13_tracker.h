@@ -1,5 +1,5 @@
 // 存储服务器
-// 实现跟踪客户机线程类
+// 声明跟踪客户机线程类
 //
 #pragma once
 
@@ -7,10 +7,10 @@
 //
 // 存储服务器状态检查线程类
 //
-class status_c: public acl::thread {
+class tracker_c: public acl::thread {
 public:
     // 构造函数
-    status_c(void);
+    tracker_c(char const* taddr);
 
     // 终止线程
     void stop(void);
@@ -20,8 +20,11 @@ protected:
     void* run(void);
 
 private:
-    // 检查存储服务器状态
-    int check(void) const;
+    // 向跟踪服务器发送加入包
+    int join(acl::socket_stream* conn) const;
+    // 向跟踪服务器发送心跳包
+    int beat(acl::socket_stream* conn) const;
 
-    bool m_stop; // 是否终止
+    bool        m_stop;  // 是否终止
+    acl::string m_taddr; // 跟踪服务器地址
 };

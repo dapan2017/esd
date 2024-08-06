@@ -37,7 +37,7 @@ acl::master_int_tbl cfg_int[] = { // 整型配置表
     {"redis_key_timeout",          60, &cfg_ktimeout, 0, 0},
     {0, 0, 0, 0, 0}};
 
-std::vector<std::string> g_spahts; // 存储路径表
+std::vector<std::string> g_spaths; // 存储路径表
 std::vector<std::string> g_taddrs; // 跟踪服务器地址表
 std::vector<std::string> g_iaddrs; // ID服务器地址表
 std::vector<std::string> g_maddrs; // MySQL地址表

@@ -403,58 +403,113 @@ int service_c::id2path(char const* spath, long fileid,
 int service_c::save(acl::socket_stream* conn, char const* appid,
     char const* userid, char const* fileid, long long filesize,
     char const* filepath) const {
-    // 文件操作对象
-    file_c file;
-    
+    file_c file; // 文件操作对象
+
     // 打开文件
-    if(file.open(filepath,path_c::OWRITE)!=OK)
+    if (file.open(filepath, file_c::O_WRITE) != OK)
         return ERROR;
+
     // 依次将接收到的数据块写入文件
-    long long remain = filesize;
-    char rcvwr[STORAGE_RCVWR_SIZE];
-    while(remain){
-        long long bytes = std::min(remain,sizeof(rcvwr);
-        long long count = conn->read(rcvwr,bytes);
-        if(count < 0){
-            logger_error("read fail:%s,bytes:%lld,from:%s",
-                acl::last_serror(),bytes,conn->get_peer());
+    long long remain = filesize; // 未接收字节数
+    char rcvwr[STORAGE_RCVWR_SIZE]; // 接收写入缓冲区
+    while (remain) { // 还有未接收数据
+        // 接收数据
+        long long bytes = std::min(remain, (long long)sizeof(rcvwr));
+        long long count = conn->read(rcvwr, bytes);
+        if (count < 0) {
+            logger_error("read fail: %s, bytes: %lld, from: %s",
+                acl::last_serror(), bytes, conn->get_peer());
             file.close();
             return SOCKET_ERROR;
         }
-        if(file.write(rcvwr,count)!=OK){
+        // 写入文件
+        if (file.write(rcvwr, count) != OK) {
             file.close();
             return ERROR;
         }
-        remain -= count;
-
-    }
-    file.close();
-    // 未接收字节数
-    // 接收写入缓冲区
-    // 还有未接收数据
-        // 接收数据
-        // 写入文件
         // 未收递减
+        remain -= count;
+    }
 
     // 关闭文件
+    file.close();
 
-    // 数据库访问对象
-    db_c db;
-    if(db.connect()!=OK){
+    db_c db; // 数据库访问对象
+
+    // 连接数据库
+    if (db.connect() != OK) {
+        file.del(filepath);
+        return ERROR;
+    }
+    
+    // 设置文件ID和路径及大小的对应关系
+    if (db.set(appid, userid, fileid, filepath, filesize) != OK) {
+        error(conn, -1, "insert database fail, fileid: %s", fileid);
         file.del(filepath);
         return ERROR;
     }
 
-    
-
-    // 连接数据库
-    
-    // 设置文件ID和路径及大小的对应关系
+    return OK;
 }
 
 // 读取并发送文件
 int service_c::send(acl::socket_stream* conn, char const* filepath,
     long long offset, long long size) const {
+    file_c file; // 文件操作对象
+
+    // 打开文件
+    if (file.open(filepath, file_c::O_READ) != OK)
+        return ERROR;
+
+    // 设置偏移
+    if (offset && file.seek(offset) != OK) {
+        file.close();
+        return ERROR;
+    }
+
+    // |包体长度|命令|状态|文件内容|
+    // |    8   |  1 |  1 |内容大小|
+    // 构造响应头
+    long long bodylen = size;
+    long long headlen = HEADLEN;
+    char head[headlen] = {};
+    llton(bodylen, head);
+    head[BODYLEN_SIZE] = CMD_STORAGE_REPLY;
+    head[BODYLEN_SIZE+COMMAND_SIZE] = 0;
+
+    // 发送响应头
+    if (conn->write(head, headlen) < 0) {
+        logger_error("write fail: %s, headlen: %lld, to: %s",
+            acl::last_serror(), headlen, conn->get_peer());
+        file.close();
+        return SOCKET_ERROR;
+    }
+
+    // 依次将从文件中读取到的数据块作为响应体的一部分发送去
+    long long remain = size; // 未读取字节数
+    char rdsnd[STORAGE_RDSND_SIZE]; // 读取发送缓冲区
+    while (remain) { // 还有未读取数据
+        // 读取文件
+        long long count = std::min(remain, (long long)sizeof(rdsnd));
+        if (file.read(rdsnd, count) != OK) {
+            file.close();
+            return ERROR;
+        }
+        // 发送数据
+        if (conn->write(rdsnd, count) < 0) {
+            logger_error("write fail: %s, count: %lld, to: %s",
+                acl::last_serror(), count, conn->get_peer());
+            file.close();
+            return SOCKET_ERROR;
+        }
+        // 未读递减
+        remain -= count;
+    }
+
+    // 关闭文件
+    file.close();
+
+    return OK;
 }
 
 ////////////////////////////////////////////////////////////////////////
