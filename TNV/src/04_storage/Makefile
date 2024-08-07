@@ -4,7 +4,7 @@ CC     = g++
 LINK   = g++
 RM     = rm -rf
 CFLAGS = -c -Wall \
-	 -I/usr/include/acl-lib/acl_cpp \
+	 -I/usr/local/include/acl-lib/acl_cpp \
 	 `mysql_config --cflags` \
 	 -I../01_common
 LIBS   = -pthread -lacl_all `mysql_config --libs`

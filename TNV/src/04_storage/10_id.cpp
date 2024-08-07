@@ -29,12 +29,13 @@ long id_c::get(char const* key) const {
     // 构造请求
     long long bodylen = keylen + 1;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    // char requ[requlen] = {};
+    char* requ = new char[requlen];
     llton(bodylen, requ);
     requ[BODYLEN_SIZE] = CMD_ID_GET;
     requ[BODYLEN_SIZE+COMMAND_SIZE] = 0;
     strcpy(requ + HEADLEN, key);
-
+    delete[] requ;
     // 向ID服务器发送请求，接收并解析响应，从中获取ID值
     return client(requ, requlen);
 }
@@ -73,7 +74,8 @@ long id_c::client(char const* requ, long long requlen) const {
 
     // 从ID服务器接收响应
     long long resplen = HEADLEN + BODYLEN_SIZE;
-    char resp[resplen] = {};
+    // char resp[resplen] = {};
+    char* resp = new char[resplen];
     if (conn.read(resp, resplen) < 0) {
         logger_error("read fail: %s, resplen: %lld, from: %s",
             acl::last_serror(), resplen, conn.get_peer());
@@ -85,7 +87,7 @@ long id_c::client(char const* requ, long long requlen) const {
     // |    8   |  1 |  1 |  8 |
     // 从ID服务器的响应中解析出ID值
     long value = ntol(resp + HEADLEN);
-
+    delete[] resp;
     conn.close();
 
     return value;

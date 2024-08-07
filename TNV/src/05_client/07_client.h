@@ -1,20 +1,21 @@
 // 客户机
-// 声明连接类
+// 声明客户机类
 //
 #pragma once
 
+#include <vector>
 #include <string>
 #include <lib_acl.hpp>
 //
-// 连接类
+// 客户机类
 //
-class conn_c: public acl::connect_client {
+class client_c {
 public:
-    // 构造函数
-    conn_c(char const* destaddr, int ctimeout = 30,
-        int rtimeout = 60);
-    // 析构函数
-    ~conn_c(void);
+    // 初始化
+    static int init(char const* taddrs,
+        int tcount = 16, int scount = 8);
+    // 终结化
+    static void deinit(void);
 
     // 从跟踪服务器获取存储服务器地址列表
     int saddrs(char const* appid, char const* userid,
@@ -38,30 +39,8 @@ public:
     // 删除存储服务器上的文件
     int del(char const* appid, char const* userid, char const* fileid);
 
-    // 获取错误号
-    short errnumb(void) const;
-    // 获取错误描述
-    char const* errdesc(void) const;
-
-protected:
-    // 打开连接
-    bool open(void);
-    // 关闭连接
-    void close(void);
-
 private:
-    // 构造请求
-    int makerequ(char command, char const* appid,
-        char const* userid, char const* fileid, char* requ);
-    // 接收包体
-    int recvbody(char** body, long long* bodylen);
-    // 接收包头
-    int recvhead(long long* bodylen);
-
-    char*               m_destaddr; // 目的地址
-    int                 m_ctimeout; // 连接超时
-    int                 m_rtimeout; // 读写超时
-    acl::socket_stream* m_conn;     // 连接对象
-    short               m_errnumb;  // 错误号
-    acl::string         m_errdesc;  // 错误描述
+    static acl::connect_manager* s_mngr; // 连接池管理器
+    static std::vector<std::string> s_taddrs; // 跟踪服务器地址表
+    static int s_scount; // 存储服务器连接数上限
 };
