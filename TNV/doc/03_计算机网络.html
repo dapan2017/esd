@@ -1,0 +1,846 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color: #ffffff; --text-color: #333333; --select-text-bg-color: #B5D6FC; --select-text-font-color: auto; --monospace: "Lucida Console",Consolas,"Courier",monospace; --title-bar-height: 20px; }
+.mac-os-11 { --title-bar-height: 28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+h1, h2, h3, h4, h5 { white-space: pre-wrap; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+thead, tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+svg { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; border-color: transparent !important; padding-top: 0px !important; padding-bottom: 0px !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  #write > p:nth-child(1) { margin-top: 0px; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+  figure { overflow-x: visible; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.reversefootnote { font-family: ui-monospace, sans-serif; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex: 2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; overflow-wrap: anywhere; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+mjx-container { break-inside: avoid; }
+.md-alert.md-alert-note { border-left-color: rgb(9, 105, 218); }
+.md-alert.md-alert-important { border-left-color: rgb(130, 80, 223); }
+.md-alert.md-alert-warning { border-left-color: rgb(154, 103, 0); }
+.md-alert.md-alert-tip { border-left-color: rgb(31, 136, 61); }
+.md-alert.md-alert-caution { border-left-color: rgb(207, 34, 46); }
+.md-alert { padding: 0px 1em; margin-bottom: 16px; color: inherit; border-left: 0.25em solid rgb(0, 0, 0); }
+.md-alert-text-note { color: rgb(9, 105, 218); }
+.md-alert-text-important { color: rgb(130, 80, 223); }
+.md-alert-text-warning { color: rgb(154, 103, 0); }
+.md-alert-text-tip { color: rgb(31, 136, 61); }
+.md-alert-text-caution { color: rgb(207, 34, 46); }
+.md-alert-text { font-size: 0.9rem; font-weight: 700; }
+.md-alert-text svg { fill: currentcolor; position: relative; top: 0.125em; margin-right: 1ch; overflow: visible; }
+.md-alert-text-container::after { content: attr(data-text); text-transform: capitalize; pointer-events: none; margin-right: 1ch; }
+
+
+.CodeMirror { height: auto; }
+.CodeMirror.cm-s-inner { background: inherit; }
+.CodeMirror-scroll { overflow: auto hidden; z-index: 3; }
+.CodeMirror-gutter-filler, .CodeMirror-scrollbar-filler { background-color: rgb(255, 255, 255); }
+.CodeMirror-gutters { border-right: 1px solid rgb(221, 221, 221); background: inherit; white-space: nowrap; }
+.CodeMirror-linenumber { padding: 0px 3px 0px 5px; text-align: right; color: rgb(153, 153, 153); }
+.cm-s-inner .cm-keyword { color: rgb(119, 0, 136); }
+.cm-s-inner .cm-atom, .cm-s-inner.cm-atom { color: rgb(34, 17, 153); }
+.cm-s-inner .cm-number { color: rgb(17, 102, 68); }
+.cm-s-inner .cm-def { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-variable { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-variable-2 { color: rgb(0, 85, 170); }
+.cm-s-inner .cm-variable-3 { color: rgb(0, 136, 85); }
+.cm-s-inner .cm-string { color: rgb(170, 17, 17); }
+.cm-s-inner .cm-property { color: rgb(0, 0, 0); }
+.cm-s-inner .cm-operator { color: rgb(152, 26, 26); }
+.cm-s-inner .cm-comment, .cm-s-inner.cm-comment { color: rgb(170, 85, 0); }
+.cm-s-inner .cm-string-2 { color: rgb(255, 85, 0); }
+.cm-s-inner .cm-meta { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-qualifier { color: rgb(85, 85, 85); }
+.cm-s-inner .cm-builtin { color: rgb(51, 0, 170); }
+.cm-s-inner .cm-bracket { color: rgb(153, 153, 119); }
+.cm-s-inner .cm-tag { color: rgb(17, 119, 0); }
+.cm-s-inner .cm-attribute { color: rgb(0, 0, 204); }
+.cm-s-inner .cm-header, .cm-s-inner.cm-header { color: rgb(0, 0, 255); }
+.cm-s-inner .cm-quote, .cm-s-inner.cm-quote { color: rgb(0, 153, 0); }
+.cm-s-inner .cm-hr, .cm-s-inner.cm-hr { color: rgb(153, 153, 153); }
+.cm-s-inner .cm-link, .cm-s-inner.cm-link { color: rgb(0, 0, 204); }
+.cm-negative { color: rgb(221, 68, 68); }
+.cm-positive { color: rgb(34, 153, 34); }
+.cm-header, .cm-strong { font-weight: 700; }
+.cm-del { text-decoration: line-through; }
+.cm-em { font-style: italic; }
+.cm-link { text-decoration: underline; }
+.cm-error { color: red; }
+.cm-invalidchar { color: red; }
+.cm-constant { color: rgb(38, 139, 210); }
+.cm-defined { color: rgb(181, 137, 0); }
+div.CodeMirror span.CodeMirror-matchingbracket { color: rgb(0, 255, 0); }
+div.CodeMirror span.CodeMirror-nonmatchingbracket { color: rgb(255, 34, 34); }
+.cm-s-inner .CodeMirror-activeline-background { background: inherit; }
+.CodeMirror { position: relative; overflow: hidden; }
+.CodeMirror-scroll { height: 100%; outline: 0px; position: relative; box-sizing: content-box; background: inherit; }
+.CodeMirror-sizer { position: relative; }
+.CodeMirror-gutter-filler, .CodeMirror-hscrollbar, .CodeMirror-scrollbar-filler, .CodeMirror-vscrollbar { position: absolute; z-index: 6; display: none; outline: 0px; }
+.CodeMirror-vscrollbar { right: 0px; top: 0px; overflow: hidden; }
+.CodeMirror-hscrollbar { bottom: 0px; left: 0px; overflow: auto hidden; }
+.CodeMirror-scrollbar-filler { right: 0px; bottom: 0px; }
+.CodeMirror-gutter-filler { left: 0px; bottom: 0px; }
+.CodeMirror-gutters { position: absolute; left: 0px; top: 0px; padding-bottom: 10px; z-index: 3; overflow-y: hidden; }
+.CodeMirror-gutter { white-space: normal; height: 100%; box-sizing: content-box; padding-bottom: 30px; margin-bottom: -32px; display: inline-block; }
+.CodeMirror-gutter-wrapper { position: absolute; z-index: 4; background: 0px 0px !important; border: none !important; }
+.CodeMirror-gutter-background { position: absolute; top: 0px; bottom: 0px; z-index: 4; }
+.CodeMirror-gutter-elt { position: absolute; cursor: default; z-index: 4; }
+.CodeMirror-lines { cursor: text; }
+.CodeMirror pre { border-radius: 0px; border-width: 0px; background: 0px 0px; font-family: inherit; font-size: inherit; margin: 0px; white-space: pre; overflow-wrap: normal; color: inherit; z-index: 2; position: relative; overflow: visible; }
+.CodeMirror-wrap pre { overflow-wrap: break-word; white-space: pre-wrap; word-break: normal; }
+.CodeMirror-code pre { border-right: 30px solid transparent; width: fit-content; }
+.CodeMirror-wrap .CodeMirror-code pre { border-right: none; width: auto; }
+.CodeMirror-linebackground { position: absolute; inset: 0px; z-index: 0; }
+.CodeMirror-linewidget { position: relative; z-index: 2; overflow: auto; }
+.CodeMirror-wrap .CodeMirror-scroll { overflow-x: hidden; }
+.CodeMirror-measure { position: absolute; width: 100%; height: 0px; overflow: hidden; visibility: hidden; }
+.CodeMirror-measure pre { position: static; }
+.CodeMirror div.CodeMirror-cursor { position: absolute; visibility: hidden; border-right: none; width: 0px; }
+.CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+.CodeMirror-focused div.CodeMirror-cursor { visibility: inherit; }
+.cm-searching { background: rgba(255, 255, 0, 0.4); }
+span.cm-underlined { text-decoration: underline; }
+span.cm-strikethrough { text-decoration: line-through; }
+.cm-tw-syntaxerror { color: rgb(255, 255, 255); background-color: rgb(153, 0, 0); }
+.cm-tw-deleted { text-decoration: line-through; }
+.cm-tw-header5 { font-weight: 700; }
+.cm-tw-listitem:first-child { padding-left: 10px; }
+.cm-tw-box { border-style: solid; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-color: inherit; border-top-width: 0px !important; }
+.cm-tw-underline { text-decoration: underline; }
+@media print {
+  .CodeMirror div.CodeMirror-cursor { visibility: hidden; }
+}
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    pre {
+        page-break-inside: avoid;
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.mac-os #write{
+    caret-color: AccentColor;
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+  min-height: 1px;
+  min-width: 1px;
+}
+
+mjx-container[jax="SVG"] > svg a {
+  fill: blue;
+  stroke: blue;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line], svg[data-table] > g > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame], svg[data-table] > g > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed, svg[data-table] > g > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted, svg[data-table] > g > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > g > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+mjx-container[jax="SVG2"] path[data-c], mjx-container[jax="SVG2"] use[data-c] {
+  stroke-width: 3;
+}
+
+g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+
+.MathJax g[data-mml-node="xypic"] path {
+  stroke-width: inherit;
+}
+mjx-container[jax="SVG"] path[data-c], mjx-container[jax="SVG"] use[data-c] {
+							stroke-width: 0;
+						} .typora-export li, .typora-export p, .typora-export,  .footnote-line {white-space: normal;} h1,h2,h3,h4,h5 {white-space:pre-line}
+</style><title>03_计算机网络</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h2 id='1-网络协议包括哪些层次'><span>1 网络协议包括哪些层次？</span></h2><ul><li><p><span>应用层协议</span></p><ul><li><p><span>超文本传输协议（HTTP、HTTPS）</span></p></li><li><p><span>文件传输协议（FTP）</span></p></li><li><p><span>简单文件传输协议（TFTP）</span></p></li><li><p><span>简单邮件传输协议（SMTP）</span></p></li><li><p><span>邮局协议第三版（POP3）</span></p></li><li><p><span>动态主机配置协议（DHCP）</span></p></li><li><p><span>简单网络管理协议（SNMP）</span></p></li><li><p><span>域名服务协议（DNS）</span></p></li><li><p><span>远程登录协议（TELNET）</span></p></li><li><p><span>安全外壳协议（SSH）</span></p></li></ul></li><li><p><span>传输层协议</span></p><ul><li><p><span>传输控制协议（TCP）</span></p></li><li><p><span>用户数据报文协议（UDP）</span></p></li></ul></li><li><p><span>网络层协议</span></p><ul><li><p><span>网际协议（IP）</span></p></li><li><p><span>地址转换协议（ARP）</span></p></li><li><p><span>反向地址转换协议（RARP）</span></p></li><li><p><span>互联网控制报文协议（ICMP）</span></p></li><li><p><span>互联网组管理协议（IGMP）</span></p></li><li><p><span>路由信息协议（RIP）</span></p></li><li><p><span>边界网关协议（BGP）</span></p></li><li><p><span>分布式链路状态协议（OSPF）</span></p></li></ul></li><li><p><span>数据链路层协议</span></p><ul><li><p><span>点对点协议（PPP）</span></p></li><li><p><span>停止等待协议（CSMA/CD）</span></p></li><li><p><span>自动重传请求协议（ARQ）</span></p></li></ul></li><li><p><span>物理层协议</span></p><ul><li><p><span>传输线相关标准</span></p></li><li><p><span>中继器相关标准</span></p></li><li><p><span>集线器相关标准</span></p></li><li><p><span>交换机相关标准</span></p></li></ul></li></ul><h2 id='2-ip地址分为哪些类型'><span>2 IP地址分为哪些类型？</span></h2><ul><li><p><span>A类地址</span></p><ul><li><p><span>网络号占前8位，以0开头，可分配范围：1~126</span></p></li><li><p><span>主机号占后24位，最大主机数：16777214</span></p></li></ul></li><li><p><span>B类地址</span></p><ul><li><p><span>网络号占前16位，以10开头，可分配范围：128.1~191.255</span></p></li><li><p><span>主机号占后16位，最大主机数：65534</span></p></li></ul></li><li><p><span>C类地址</span></p><ul><li><p><span>网络号占前24为，以110开头，可分配范围：192.0.1~223.255.255</span></p></li><li><p><span>主机号占后8位，最大主机数：254</span></p></li></ul></li><li><p><span>D类地址</span></p><ul><li><p><span>以1110开头</span></p></li><li><p><span>保留为多播地址</span></p></li></ul></li><li><p><span>E类地址</span></p><ul><li><p><span>以1111开头</span></p></li><li><p><span>保留为以后使用</span></p></li></ul></li></ul><h2 id='3-在子网21027482130中有多少个可用的主机地址'><span>3 在子网210.27.48.21/30中，有多少个可用的主机地址？</span></h2><ul><li><p><span>210.27.48.21表示网络中一台主机的IP地址，斜杠后面的30表示其中前30位是网络号，后2位是主机号</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="" style="break-inside: unset;"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 43.9905px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 36px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>18</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation" style=""><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -35.9972px; width: 36px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.21</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">2</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;  |______</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">3</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;  | &nbsp; &nbsp;  |</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">4</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.00010101</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">5</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">|______________|_|</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">6</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp;  网络号 &nbsp; 主机号</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">7</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> _____网络地址____</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">8</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">9</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.00010100</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">10</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;  |______|</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">11</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">12</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.20</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">13</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"> _____主机地址____</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">14</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">| &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  |</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">15</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.00010100 - 多播地址</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">16</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.00010101 - 主机地址</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt" style="left: 0px; width: 27px;">17</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.00010110 - 主机地址</span></pre></div><div style="position: relative;"><div class="CodeMirror-gutter-wrapper" style="left: -35.9972px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 27px;">18</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">210.27.48.00010111 - 广播地址</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 415px;"></div><div class="CodeMirror-gutters" style="height: 415px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 35px;"></div></div></div></div></pre></li><li><p><span>在子网210.27.48.21/30中，有两可用主机地址：</span></p><ul><li><p><span>210.27.48.21</span></p></li><li><p><span>210.27.48.22</span></p></li></ul></li></ul><h2 id='4-路由表的作用是什么在linux系统中如何配置默认路由'><span>4 路由表的作用是什么？在Linux系统中如何配置默认路由？</span></h2><ul><li><p><span>路由表是用来指导如何将一个数据包从一个子网传送到另一个子网的</span></p></li><li><p><span>路由表中的每一个条目至少包含目标网络号、子网掩码和为到达目标网络应使用的网卡等信息</span></p></li><li><p><span>当路由器从它的一块网卡接收到一个数据包时，它会扫描路由表中的每一个条目，用其中的子网掩码和数据包的目的IP地址做位与运算，得到目标网络号</span></p></li><li><p><span>若所得到的目标网络号与该条目的目标网络号匹配，则将该条目作为一个备选路由</span></p></li><li><p><span>在所有备选路由中选择目标网络号最长的，作为命中路由</span></p></li><li><p><span>将数据包通过命中路由的网卡发送出去</span></p></li><li><p><span>若一个匹配的条目都没有，则通过默认路由的网卡将数据包发送出去</span></p></li><li><p><span>在Linux系统中配置默认路由的命令：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="bash"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="bash"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">route add default gw &lt;默认路由IP地址&gt;</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre></li></ul><h2 id='5-如何检测两台主机是否连通如不通如何判断故障点'><span>5 如何检测两台主机是否连通？如不通如何判断故障点？</span></h2><ul><li><p><span>检测两台主机是否连通可以使用ping命令</span></p></li><li><p><span>如果ping不通，可以使用traceroute命令，找出具体是哪个路由器不能连通</span></p></li><li><p><span>然后再定位发生故障的传输线、中继器、集线器或者交换机</span></p></li></ul><h2 id='6-什么是ttl哪些工具可能会用到ttl'><span>6 什么是TTL？哪些工具可能会用到TTL？</span></h2><ul><li><p><span>TTL是Time To Live的缩写，即生存时间，是指允许一个数据包在到达其目的地之前最多经过多少个路由器</span></p></li><li><p><span>数据包每经过一个路由器，其生存时间就会被路由器减一</span></p></li><li><p><span>当一个数据包的生存时间被减到零时，就会被路由器丢弃</span></p></li><li><p><span>TTL主要是为了防止数据包在网络回路上无限循环</span></p></li><li><p><span>ping和traceroute工具都会用到TTL</span></p></li></ul><h2 id='7-arp协议的工作原理是什么'><span>7 ARP协议的工作原理是什么？</span></h2><ul><li><p><span>工作在网络层的ARP协议主要负责IP地址到物理地址的转换</span></p></li><li><p><span>每台主机都维护一张ARP列表，其中包含一系列IP地址和物理地址的对应关系</span></p></li><li><p><span>当源主机要将一个数据包发送到目的主机时，会先在ARP列表中搜索与该目的主机的IP地址相对应的物理地址</span></p><ul><li><p><span>如果找到了，则直接将数据包发送到这个物理地址</span></p></li><li><p><span>如果没找到，则向本网段广播一个ARP请求包，其中包含源主机的IP地址和物理地址，以及目的主机的IP地址。网段中每台收到该ARP请求包的主机，都会检查请求包中的目的主机IP地址</span></p><ul><li><p><span>若请求包中的目的主机IP地址与自己的IP地址不一致，则忽略该请求包</span></p></li><li><p><span>若请求包中的目的主机IP地址与自己的IP地址一致，则将源主机的IP地址和物理地址保存到自己的ARP列表中，同时向源主机返回一个ARP响应包，其中包含自己的物理地址</span></p></li></ul></li></ul></li><li><p><span>收到ARP响应包的源主机一方面将目的主机的IP地址和物理地址保存到自己的ARP列表中，另一方面将数据包发送到目的主机的物理地址</span></p></li><li><p><span>若源主机一直没有收到ARP响应包，则宣告ARP查询失败</span></p></li></ul><h2 id='8-tcp协议的主要特点是什么'><span>8 TCP协议的主要特点是什么？</span></h2><ul><li><p><span>TCP是一种面向连接的通信协议</span></p><ul><li><p><span>通信之前必须先建立连接，即所谓虚电路</span></p></li><li><p><span>凭借已有的连接，通信双方相互交换数据</span></p></li><li><p><span>通信结束后双方终止连接，释放连接资源</span></p></li></ul></li><li><p><span>TCP只支持点对点的通信，不支持广播通信</span></p><ul><li><p><span>一个连接只有两个端点，实现点对点的通信</span></p></li><li><p><span>不能在一个连接上实现，一多或者多多通信</span></p></li></ul></li><li><p><span>TCP保证数据传输的可靠性</span></p><ul><li><p><span>不丢失、不重复、无差错、保证顺序</span></p></li></ul></li><li><p><span>TCP是一种面向字节流的通信协议</span></p><ul><li><p><span>传输层看到的是无结构的字节序列</span></p></li><li><p><span>应用层需自己实现记录边界的划分</span></p></li></ul></li><li><p><span>TCP协议提供全双工通信</span></p><ul><li><p><span>通信双发可以同时收发报文</span></p></li></ul></li></ul><h2 id='9-udp协议的主要特点是什么'><span>9 UDP协议的主要特点是什么？</span></h2><ul><li><p><span>UDP是一种面向无连接的通信协议</span></p><ul><li><p><span>通信双方不存在长期关系</span></p></li></ul></li><li><p><span>UDP不仅支持点对点的通信，还支持广播通信</span></p><ul><li><p><span>一对一、一对多、多对一、多对多</span></p></li></ul></li><li><p><span>UDP不保证数据传输的可靠性</span></p><ul><li><p><span>可能丢失、可能重复、可能有差错、不保证顺序</span></p></li></ul></li><li><p><span>UDP是一种面向记录的通信协议</span></p><ul><li><p><span>传输层看到的是有结构的记录</span></p></li><li><p><span>应用层无需自己划分记录边界</span></p></li></ul></li><li><p><span>UDP协议提供全双工通信</span></p><ul><li><p><span>通信双发可以同时收发报文</span></p></li></ul></li></ul><h2 id='10-tcp协议和udp协议有何区别'><span>10 TCP协议和UDP协议有何区别？</span></h2><ul><li><p><span>TCP协议面向连接；UDP协议面向无连接</span></p></li><li><p><span>TCP协议仅支持点对点通信；UDP协议除了支持点对点通信，还支持广播通信</span></p></li><li><p><span>TCP协议保证数据传输的可靠性；UDP协议不保证数据传输的可靠性</span></p></li><li><p><span>TCP协议面向字节流；UDP协议面向记录</span></p></li><li><p><span>TCP协议是重量级协议，速度慢，数据量大；UDP协议是轻量级协议，速度快，数据量小</span></p></li></ul><h2 id='11-tcp协议是如何保证可靠传输的'><span>11 TCP协议是如何保证可靠传输的？</span></h2><ul><li><p><span>应答确认：每发送一个分组，必须等待对方确认收到，否则不算发送成功</span></p></li><li><p><span>超时重传：如果超过一定时间还没有收到对方确认，则认为发送失败，重新发送该分组</span></p></li><li><p><span>分组校验：每接收一个分组，校验其正确性，如有差错，直接丢弃且不发确认，迫使对方重发</span></p></li><li><p><span>乱序重排：对接收到的分组按序号重排，保证跟发送的顺序一致</span></p></li><li><p><span>丢弃重复：重排过程中，如发现序号相同的重复分组，只留一个</span></p></li><li><p><span>流量控制：动态调整发送方的发送速度，以与接收方的接收能力相适应</span></p></li><li><p><span>拥塞控制：动态调整发送方的发送速度，以与网络的承载能力相适应</span></p></li></ul><h2 id='12-什么是应答确认'><span>12 什么是应答确认？</span></h2><ul><li><p><span>参与TCP通信的一方向另一方发送数据时，传输层会在每发送完一个分组后，等待对方返回应答确认</span></p><ul><li><p><span>分组无误，收到确认</span></p></li><li><p><span>分组有误，收不到确认，重传该分组</span></p></li><li><p><span>分组丢失，收不到确认，重传该分组</span></p></li><li><p><span>分组无误，确认迟到，重传该分组，对方丢弃重复分组</span></p></li></ul></li></ul><h2 id='13-什么是超时重传'><span>13 什么是超时重传？</span></h2><ul><li><p><span>参与TCP通信的一方向另一方发送数据时，传输层会在每发送完一个分组后，启动一个超时计时器</span></p></li><li><p><span>如果在超时计时器到期前，仍未收到对方返回的应答确认，则认定分组丢失或有误，重传分组并等待更长时间</span></p></li><li><p><span>TCP协议包含用于动态估算数据平均往返时间（Round-Trip Time，RTT）的算法，因此它知道等待一个确认至少需要多长时间</span></p></li></ul><h2 id='14-什么是滑动窗口'><span>14 什么是滑动窗口？</span></h2><ul><li><p><span>滑动窗口是TCP协议实现流量控制的基础</span></p></li><li><p><span>通常所说的滑动窗口是指接收方滑动窗口</span></p></li><li><p><span>滑动窗口的大小反映了接收方用于接收数据的缓冲区可用空间的大小</span></p></li><li><p><span>当滑动窗口比较大时，意味着接收方具有较强的接收能力，发送方可以加快发送速度</span></p></li><li><p><span>当滑动窗口比较小时，意味着接收方接收数据的能力不足，发送方必须降低发送速度</span></p></li><li><p><span>当滑动窗口降为零时，意味着接收方暂时不能再接收数据，发送方应停止数据的发送，除非是特别紧急的数据</span></p></li></ul><h2 id='15-什么是流量控制'><span>15 什么是流量控制？</span></h2><ul><li><p><span>参与TCP通信的接收方在接收数据的同时，会不断告知对方它最多还能够接收多少字节数据，即所谓滑动窗口</span></p></li><li><p><span>任何时候，滑动窗口都反映了接收缓冲区可用空间的大小，以确保不会因发送数据的速度过快而导致溢出丢失</span></p></li></ul><h2 id='16-什么是拥塞控制其中涉及哪些算法'><span>16 什么是拥塞控制？其中涉及哪些算法？</span></h2><ul><li><p><span>在某段时间内，如果网络中对某个资源的需求超过了该资源所能提供的极限，网络性能就会变差，这就叫拥塞</span></p></li><li><p><span>拥塞控制的目的就是为了防止过多的数据在短时间内注入网络，导致网络中的路由器、交换机等设备出现过载</span></p></li><li><p><span>参与TCP通信的发送方会维护一个拥塞窗口，该窗口的大小反映了网络当前的承载能力，随时可能发生变化</span></p></li><li><p><span>发送方滑动窗口其实是由拥塞窗口和接收方滑动窗口中较小的那个决定的，既要网络送得出，又要对方接得住</span></p></li><li><p><span>与拥塞控制有关的算法主要有三个：</span></p><ul><li><p><span>慢开始：发送伊始，对网络的承载能力尚不明确，先低速慢传，逐渐增大拥塞窗口</span></p></li><li><p><span>拥塞避免：拥塞窗口的增大速度不宜过快，每经历一个RTT，只增大一个字节</span></p></li><li><p><span>快重传和快恢复：接收方根据分组序号发现缺失了某个分组，直接告诉发送方重传，不必等待超时再重传</span></p></li></ul></li></ul><h2 id='17-基于tcp和udp协议的常见应用层协议都有哪些'><span>17 基于TCP和UDP协议的常见应用层协议都有哪些？</span></h2><ul><li><p><span>基于TCP的常见应用层协议</span></p><ul><li><p><span>超文本传输协议（HTTP、HTTPS）：从Web服务器上下载超文本内容在浏览器中显示，默认使用80端口</span></p></li><li><p><span>文件传输协议（FTP）：上传和下载文件，默认使用21端口</span></p></li><li><p><span>简单邮件传输协议（SMTP）：发送电子邮件到邮件服务器，默认使用25端口</span></p></li><li><p><span>邮局协议第三版（POP3）：从邮件服务器接收电子邮件，默认使用110端口</span></p></li><li><p><span>远程登录协议（TELNET）：远程登录到服务器，默认使用23端口</span></p></li><li><p><span>安全外壳协议（SSH）：以加密方式远程登录到服务器，默认使用22端口</span></p></li></ul></li><li><p><span>基于UDP的常见应用层协议</span></p><ul><li><p><span>简单文件传输协议（TFTP）：上传和下载文件，默认使用69端口</span></p></li><li><p><span>动态主机配置协议（DHCP）：分配和管理局域网内计算机的IP地址，服务器默认使用67端口，客户机默认使用68端口</span></p></li><li><p><span>简单网络管理协议（SNMP）：管理网路中的各种设备，默认使用161端口</span></p></li><li><p><span>域名服务协议（DNS）：将主机域名解析为IP地址，默认使用53端口</span></p></li></ul></li></ul><h2 id='18-什么是tcp协议的三路握手'><span>18 什么是TCP协议的三路握手?</span></h2><ul><li><p><span>第一路握手：客户机向服务器发送一个SYN分组，序号为J，而后进入SYN_SENT状态</span></p></li><li><p><span>第二路握手：服务器收到来自客户机的SYN分组，向客户机发送一个ACK+SYN分组，确认号为J+1，序号为K，而后进入SYN_RCVD状态</span></p></li><li><p><span>第三路握手：客户机收到来自服务器的ACK+SYN分组，向服务器发送一个ACK分组，确认号为K+1，而后进入ESTABLISHED状态；服务器收到来自客户机的ACK分组，也进入ESTABLISHED状态，连接建立完成</span></p></li></ul><h2 id='19-建立tcp连接的三路握手中只有前两路为什么不行'><span>19 建立TCP连接的三路握手中，只有前两路为什么不行？</span></h2><ul><li><p><span>TCP连接的三路握手是为了让参与通信的双方能够确认自己和对方的发送和接收能力</span></p><ul><li><p><span>第一路握手是为了让服务器确认：客户机能发送、服务器能接收</span></p></li><li><p><span>第二路握手是为了让客户机确认：客户机能发送、服务器能接收、服务器能发送、客户机能接收</span></p></li><li><p><span>第三路握手是为了让服务器确认：服务器能发送、客户机能接收</span></p></li></ul></li><li><p><span>如果没有第三路握手，服务器就无法确认自己是否可以发送，而对方是否可以接收</span></p></li></ul><h2 id='20-什么是tcp协议的四路挥手'><span>20 什么是TCP协议的四路挥手？</span></h2><ul><li><p><span>第一路挥手：客户机向服务器发送一个FIN分组，序号为M，而后进入FIN_WAIT_1状态</span></p></li><li><p><span>第二路挥手：服务器向客户机发送一个ACK分组，确认号为M+1，而后进入CLOSE_WAIT状态；客户机收到该分组后进入FIN_WAIT_2状态</span></p></li><li><p><span>第三路挥手：服务器向客户机发送一个FIN分组，序号为N，而后进入LAST_ACK状态</span></p></li><li><p><span>第四路挥手：客户机向服务器发送一个ACK分组，确认号为N+1，而后进入TIME_WAIT状态，并在该状态停留一个报文往返时间，即2MSL后，进入CLOSED状态；服务器收到该分组后进入CLOSED状态，连接断开完成</span></p></li></ul><h2 id='21-为什么timewait状态必须等待2msl时间'><span>21 为什么TIME_WAIT状态必须等待2MSL时间？</span></h2><ul><li><p><span>假设在TCP四路挥手的第四路，客户机向服务器发送了ACK分组，并进入TIME_WAIT状态后，由于某种原因，服务器并没有收到该分组，这时服务器会向客户机重发第三路的FIN分组</span></p></li><li><p><span>客户机的ACK分组到达服务器需要1MSL，服务器重发的FIN分组到达客户机也需要1MSL，二者之和是2MSL</span></p></li><li><p><span>这是客户机判断服务器是否收到ACK分组的最大时长，超过2MSL仍没有收到服务器重发的FIN分组，则可以确信对方已收到ACK分组并进入CLOSED状态，这时客户机再进入CLOSED状态是最为合理的</span></p></li></ul><h2 id='22-什么是tcp粘包'><span>22 什么是TCP粘包？</span></h2><ul><li><p><span>TCP是一种面向字节流的通信协议，应用层交给传输层的可能是一系列大小不等的数据块，即所谓记录，但在传输层看来，它们只是一段连绵不绝字节序列，即所谓流，其中既没有记录的边界，也没有记录的大小</span></p></li><li><p><span>当应用层从传输层获取接收到的数据时，一次得到的可能一条完整的记录，也可能是部分记录或多条记录，甚至可能是一或多条记录连带着部分记录，这种记录与记录间的粘连现象，称为TCP粘包</span></p></li></ul><h2 id='23-tcp粘包是如何产生的'><span>23 TCP粘包是如何产生的？</span></h2><ul><li><p><span>如果在一个TCP连接中只发送和接收一条记录，则不可能发生粘包现象</span></p></li><li><p><span>发送方产生的粘包：当所发送的记录比较小时，TCP的传输层会将多条记录合并为一个分组，放到发送缓冲区中，这些记录在发送时就已经是粘包状态了</span></p></li><li><p><span>接收方发生的粘包：传输层不断将接收到的数据写入接收缓冲区，应用层不断从接收缓冲区读取数据。如果应用层读取的速度赶不上传输层写入的速度，接收缓冲区中的数据将发生粘连</span></p></li></ul><h2 id='24-如何解决tcp粘包问题'><span>24 如何解决TCP粘包问题？</span></h2><ul><li><p><span>一次一连法</span></p><ul><li><p><span>通信双方先建立连接，一方发送一条记录，如有需要可再接收对方返回的一条记录</span></p></li><li><p><span>另一方接收一条记录，如有需要可再向对方返回一条记录，之后通信双方断开连接</span></p></li></ul></li><li><p><span>定长记录法</span></p><ul><li><p><span>人为规定每条记录都采用固定的长度</span></p></li><li><p><span>按该长度从接收缓冲区中读取的数据都是完整的记录</span></p></li></ul></li><li><p><span>特殊分隔符法</span></p><ul><li><p><span>在每条记录与下一条记录中间插入一个特殊的分隔符</span></p></li><li><p><span>接收时以该分隔符作为划分记录的依据</span></p></li></ul></li><li><p><span>定长包头法</span></p><ul><li><p><span>在每条记录的前面增加一个固定长度的包头，其中包含该记录的实际长度</span></p></li><li><p><span>接收时先接收固定长度的包头，再根据包头中的记录长度，接收记录内容</span></p></li></ul></li></ul><h2 id='25-基于tcp和udp协议的网络编程模型是怎样的'><span>25 基于TCP和UDP协议的网络编程模型是怎样的？</span></h2><ul><li><p><span>基于TCP协议的网络编程模型</span></p><ul><li><p><span>服务器</span></p><ul><li><p><span>创建套接字（create）</span></p></li><li><p><span>绑定地址和端口（bind）</span></p></li><li><p><span>启动监听（listen）</span></p></li><li><p><span>等待并接受客户机连接（accept）并获得用于后续通信的套接字</span></p></li><li><p><span>和客户机收发报文（recv、send）</span></p></li><li><p><span>关闭套接字（close）</span></p></li></ul></li><li><p><span>客户机</span></p><ul><li><p><span>创建套接字（create）</span></p></li><li><p><span>连接服务器（connect）</span></p></li><li><p><span>和服务器收发报文（recv、send）</span></p></li><li><p><span>关闭套接字（close）</span></p></li></ul></li></ul></li><li><p><span>基于UDP协议的网络编程模型</span></p><ul><li><p><span>创建套接字（create）</span></p></li><li><p><span>绑定地址和端口（bind）</span></p></li><li><p><span>接收和发送报文（recvfrom、sendto）</span></p></li><li><p><span>关闭套接字（close）</span></p></li></ul></li></ul><h2 id='26-connect和accept函数分别在tcp三路握手的哪个阶段返回'><span>26 connect和accept函数分别在TCP三路握手的哪个阶段返回？</span></h2><ul><li><p><span>在TCP三路握手的第三路，客户机收到来自服务器的ACK+SYN分组，并向服务器发送一个ACK分组，随即进入ESTABLISHED状态，这时connect函数即返回</span></p></li><li><p><span>服务器在收到来自客户机的ACK分组后，将处于SYN_RCVD状态的套接字从未完成连接队列移入已完成连接对象，并将其状态更新为ESTABLISHED状态</span></p></li><li><p><span>accept函数从已完成队列中获取并返回处于ESTABLISHED状态套接字，该套接字可用于后续通信</span></p></li><li><p><span>客户机侧的connect函数可能会早于服务器侧的accept函数返回，这种情况下客户机发送的数据，会被服务器侧的传输层排队缓存在接受缓冲区中，待accept函数返回后，再被应用层读取</span></p></li></ul><h2 id='27-基于tcp协议的通信双方如何知道对方退出或重启了'><span>27 基于TCP协议的通信双方，如何知道对方退出或重启了？</span></h2><ul><li><p><span>退出或重启的一方会向另一方发送FIN分组并得到ACK应答</span></p></li><li><p><span>如果此时正在接收数据，执行接收操作的函数会返回0</span></p></li><li><p><span>如何此时正在发送数据，执行发送操作的函数不会返回失败，但会导致对方响应RST分组，该分组将超前于FIN分组，导致后续执行接收操作的函数返回失败，错误号为ECONNRESET</span></p></li><li><p><span>任何通过已收到RST分组的套接字发送数据的操作，都会触发SIGPIPE信号</span></p></li></ul><h2 id='28-基于tcp协议的通信双方如何知道对方主机断电了'><span>28 基于TCP协议的通信双方，如何知道对方主机断电了？</span></h2><ul><li><p><span>主机断电，传输层不可能再有任何数据分组的交换</span></p></li><li><p><span>如果此时正在接收数据，执行接收操作的函数会返回0</span></p></li><li><p><span>如何此时正在发送数据，执行发送操作的函数不会返回失败，但会因传输层的多次超时重传，导致后续执行接收操作的函数返回失败，错误号为ETIMEOUT、EHOSTUNREACH或者ENETUNREACH</span></p></li><li><p><span>如果在对方恢复供电并启动后发送数据，对方的传输层一律响应RST分组</span></p></li></ul><h2 id='29-如何避免connect函数长时间阻塞'><span>29 如何避免connect函数长时间阻塞？</span></h2><ul><li><p><span>调用connect函数前，先通过alarm函数设置定时器，利用SIGALRM信号，打断可能发生阻塞的connect调用</span></p></li><li><p><span>借助ioctlsocket函数将套接字设置为非阻塞模式（FIONBIO）</span></p></li></ul><h2 id='30-基于多进程和多线程的并发服务器有何区别'><span>30 基于多进程和多线程的并发服务器有何区别？</span></h2><ul><li><p><span>基于多进程的并发服务器：启动和切换速度慢，需要额外的进程间通信机制，无需同步机制解决并发冲突</span></p></li><li><p><span>基于多线程的并发服务器：启动和切换速度快，无需额外的线程间通信机制，需要同步机制解决并发冲突</span></p></li></ul><h2 id='31-保活计时器的作用是什么'><span>31 保活计时器的作用是什么？</span></h2><ul><li><p><span>基于TCP协议的客户机和服务器在建立连接后，服务器每收到一个来自客户机的数据分组，即开启一个保活计时器，为期2小时</span></p></li><li><p><span>若在保活计时器到期时，仍没有收到来自客户机的任何数据分组，服务器就会每隔75秒向客户机发送一个探测分组</span></p></li><li><p><span>如果一连发送了10个探测分组，仍没有收到来自客户机的任何回应，则认定客户机故障，关闭此连接</span></p></li></ul><h2 id='32-什么是io多路复用'><span>32 什么是I/O多路复用？</span></h2><ul><li><p><span>当需要处理可能在多个文件描述符上同时发生的I/O事件时：</span></p><ul><li><p><span>创建多个进程或线程，在每个进程或线程中监听一个文件描述符的I/O事件，并对所发生的事件进行处理</span></p></li><li><p><span>通过I/O多路复用，在一个进程或线程中同时监听多个文件描述符的I/O事件</span></p><ul><li><p><span>在一个进程或线程中依次处理多个文件描述符的I/O事件</span></p></li><li><p><span>在多个进程或线程中同时处理多个文件描述符的I/O事件</span></p></li></ul></li></ul></li><li><p><span>与I/O多路复用有关的系统调用包括：select、poll和epoll</span></p></li></ul><h2 id='33-io多路复用有何优缺点'><span>33 I/O多路复用有何优缺点？</span></h2><ul><li><p><span>I/O多路复用的优点</span></p><ul><li><p><span>用单进程或单线程模型，取代多进程或多线程模型</span></p><ul><li><p><span>规避了进程间通信和线程同步的复杂性</span></p></li><li><p><span>规避了在进程或线程间切换任务的开销</span></p></li></ul></li><li><p><span>在一个或尽可能少的进程或线程中处理I/O事件，比在大量进程或线程中等待I/O事件的资源开销小</span></p></li></ul></li><li><p><span>I/O多路复用的缺点</span></p><ul><li><p><span>单进程或单线程模型，不利于充分发挥多核处理器的性能优势</span></p></li><li><p><span>处理逻辑相对复杂，不符合人类自然的思维习惯</span></p></li></ul></li></ul><h2 id='34-select与poll和epoll相比有何缺点'><span>34 select与poll和epoll相比有何缺点？</span></h2><ul><li><p><span>调用select函数时，需要将文件描述符集从用户空间复制到内核空间，平均时间复杂度为线性级</span></p></li><li><p><span>从select函数返回，需要遍历文件描述符集中的文件描述符，平均时间复杂度为线性级</span></p></li><li><p><span>系统内核对被监听文件描述符集的大小有所限制，默认为1024</span></p></li></ul><h2 id='35-在tcp通信中select发现某个套接字可读但实际读到的字节数却是0这是为什么'><span>35 在TCP通信中，select发现某个套接字可读，但实际读到的字节数却是0，这是为什么？</span></h2><ul><li><p><span>在TCP通信中，select发现某个套接字可读，但实际读到的字节数却是0，说明对方关闭了与之相连的套接字的写端，本方关闭套接字的读端即可</span></p></li></ul><h2 id='36-套接字在什么情况下可读'><span>36 套接字在什么情况下可读？</span></h2><ul><li><p><span>监听套接字在TCP连接成功建立时可读</span></p></li><li><p><span>通信套机字在接收缓冲区有数据时可读</span></p></li><li><p><span>通信套机字在对方套接字被关闭时可读</span></p></li><li><p><span>任何套接字在有错误发生且未决时可读</span></p></li></ul><h2 id='37-epoll与select和poll相比有何优点'><span>37 epoll与select和poll相比有何优点？</span></h2><ul><li><p><span>epoll解决了select和poll在复制和遍历文件描述符集过程中的时间复杂度问题，效率更高</span></p></li></ul><h2 id='38-epoll需要在用户空间和内核空间之间复制数据吗'><span>38 epoll需要在用户空间和内核空间之间复制数据吗？</span></h2><ul><li><p><span>在注册需要监听的I/O事件时，需要将数据从用户空间复制到内核空间</span></p></li><li><p><span>当监听到有I/O事件发生并返回时，需要将数据从内核空间复制到用户空间</span></p></li></ul><h2 id='39-epoll在内核中监听就绪事件的平均时间复杂度是多少'><span>39 epoll在内核中监听就绪事件的平均时间复杂度是多少？</span></h2><ul><li><p><span>epoll在内核中以红黑树的形式组织被监听事件，查询操作的平均时间复杂度为对数级</span></p></li><li><p><span>epoll采用回调函数的方式处理被监听到的事件，平均时间复杂度为常数级</span></p></li></ul><h2 id='40-epoll中的et和lt有何区别'><span>40 epoll中的ET和LT有何区别？</span></h2><ul><li><p><span>事件触发条件不同</span></p><ul><li><p><span>LT：电平触发，专注于缓冲区的状态</span></p></li><li><p><span>ET：边沿触发，专注于缓冲区的变化</span></p></li></ul></li><li><p><span>以读就绪事件为例</span></p><ul><li><p><span>LT：只要缓冲区中还有可读数据就会触发读就绪事件</span></p></li><li><p><span>ET：只有当缓冲区被填入新数据时才触发读就绪事件</span></p></li></ul></li><li><p><span>如果一次读操作没有读完缓冲区中的数据</span></p><ul><li><p><span>LT：缓冲区中还有可读数据，持续触发读就绪事件，继续读取剩余数据</span></p></li><li><p><span>ET：缓冲区中没有新增数据，不再触发读就绪事件，在新数据到达前剩余数据不会被读取</span></p></li></ul></li><li><p><span>编程模式</span></p><ul><li><p><span>LT：读写就绪事件触发，不一定要读写完全部数据，随时触发随时读写</span></p></li><li><p><span>ET：读写就绪事件触发，尽可能地读写完全部数据，可能失去读写机会</span></p></li></ul></li><li><p><span>ET比LT的效率更高，更适合在高并发大流量的场合中使用，但对编程者的要求更高，必须仔细处理好每次事件触发，否则容易导致读写数据不完整的问题</span></p></li></ul><h2 id='41-http10http11和http20有何区别'><span>41 HTTP/1.0、HTTP/1.1和HTTP/2.0有何区别？</span></h2><ul><li><p><span>HTTP/1.0</span></p><ul><li><p><span>浏览器和服务器之间只保持短连接，一个连接只能传输一个请求和一个响应，再发请求需要重新建立连接</span></p></li><li><p><span>通过“Connection: keep-alive”字段虽可开启长连接，但其并非标准字段，不同实现的具体处理不尽相同</span></p></li></ul></li><li><p><span>HTTP/1.1</span></p><ul><li><p><span>浏览器和服务器之间保持长连接，在同一个连接上传输多个请求和响应，直到一方长期失活或主动断开</span></p></li><li><p><span>引入流水线机制（Pipelining），浏览器可以连续发送多个请求，进一步提高传输效率</span></p></li></ul></li><li><p><span>HTTP/2.0</span></p><ul><li><p><span>采用多路复用，在同一个连接上不但可以传输多个请求和响应，而且它们的先后顺序不必安全一致</span></p></li><li><p><span>通过头部压缩和服务端推送，进一步提高传输效率</span></p></li></ul></li><li><p><span>目前主流的HTTP协议依然是HTTP/1.1，HTTP/2.0的使用率正在逐年增加</span></p></li></ul><h2 id='42-http都有哪些方法'><span>42 HTTP都有哪些方法？</span></h2><ul><li><p><span>GET方法：获取资源</span></p></li><li><p><span>POST方法：上传资源</span></p></li><li><p><span>PUT方法：更新资源</span></p></li><li><p><span>DELETE方法：删除资源</span></p></li><li><p><span>PATCH：修改资源</span></p></li><li><p><span>HEAD方法：获取包头</span></p></li><li><p><span>TRACE方法：追踪路径</span></p></li><li><p><span>CONNECT方法：建立隧道</span></p></li><li><p><span>OPTIONS方法：查询被支持的方法</span></p></li></ul><h2 id='43-http协议中的get方法和post方法有何区别'><span>43 HTTP协议中的GET方法和POST方法有何区别？</span></h2><ul><li><p><span>应用场景不同</span></p><ul><li><p><span>GET方法主要用于获取资源</span></p></li><li><p><span>POST方法主要用于上传资源</span></p></li></ul></li><li><p><span>携带参数的方式不同</span></p><ul><li><p><span>GET方法所携带的参数通常位于URL字符串中，其中包含汉字在内的特殊字符需要编码为ASCII字符</span></p></li><li><p><span>POST方法所携带的参数通常位于包体中，且支持标准字符集，如UTF-8等</span></p></li></ul></li><li><p><span>安全性不同</span></p><ul><li><p><span>GET方法不会改变服务器状态，因此是安全的</span></p></li><li><p><span>POST方法可能改变服务器状态，因此不是安全的</span></p></li></ul></li><li><p><span>幂等性不同</span></p><ul><li><p><span>相同的GET方法只执行一次，和连续执行多次，在效果上是一样的，因此具有幂等性</span></p></li><li><p><span>相同的POST方法执行的次数不同，其效果往往也不同，因此不具幂等性</span></p></li></ul></li><li><p><span>可缓存性不同</span></p><ul><li><p><span>缓存针对GET方法的响应，通常是可行的</span></p></li><li><p><span>缓存针对POST方法的响应，通常没有意义</span></p></li></ul></li><li><p><span>对XMLHttpRequest的支持不同</span></p><ul><li><p><span>在使用XMLHttpRequest的GET方法时，包头和包体必须合在一起发送</span></p></li><li><p><span>在使用XMLHttpRequest的POST方法时，可以先发送包头，再发送包体</span></p></li></ul></li></ul><h2 id='44-在get请求中为什么要对url进行编码'><span>44 在GET请求中为什么要对URL进行编码？</span></h2><ul><li><p><span>GET方法所携带的参数通常位于URL字符串中，其中包含汉字在内的特殊字符需要编码为ASCII字符，例如：</span></p><ul><li><p><span>“汉字”被编码为“%E4%B8%AD%E6%96%87”</span></p></li><li><p><span>空格被编码为“%20”</span></p></li></ul></li><li><p><span>GET方法所携带的参数以键值对表示，键和值以“=”分隔，键值对之间以“&amp;”分隔，但如果键或值内部也包含这两个分隔符字符，则需对其编码，以防被误解为分隔符，例如：</span></p><ul><li><p><span>“student=tom&amp;jerry&amp;work=2+3=5”被编码为“student=tom%26jerry&amp;work=2+3%3D5”</span></p></li></ul></li></ul><h2 id='45-http数据传输已完成但不希望连接断开如何做到'><span>45 HTTP数据传输已完成，但不希望连接断开，如何做到？</span></h2><ul><li><p><span>基于HTTP/1.0的浏览器和服务器之间默认为短连接，发完请求，收完响应，连接即断开</span></p></li><li><p><span>如果希望连接继续保持，可以在请求包头中增加“Connection: keep-alive”字段，显式指明使用长连接</span></p></li><li><p><span>HTTP/1.1及更高版本，默认为长连接，如果希望短连接，可以在请求包头中增加“Connection: close”字段</span></p></li></ul><h2 id='46-http的长连接和短连接有何区别各应用于哪些场景'><span>46 HTTP的长连接和短连接有何区别？各应用于哪些场景？</span></h2><ul><li><p><span>使用长连接的浏览器和服务器之间，可以一个连接上完成多个请求响应交互。适用于需要频繁交互的场景，比如观看在线视频、玩网页游戏、参与在线交易，等等</span></p></li><li><p><span>使用短连接的浏览器和服务器之间，一个连接上只能发送和接收一个请求和响应，再发请求必须重新建立连接。适用于只需要偶尔交互的场景，比如浏览静态网页、上传下载文件、查收电子邮件，等等</span></p></li></ul><h2 id='47-http如何实现长连接'><span>47 HTTP如何实现长连接？</span></h2><ul><li><p><span>HTTP实现长连接包括两个方面</span></p><ul><li><p><span>一方面是在浏览器提交给服务器的请求包头中，加上“Connection: keep-alive”字段。当然这是在使用HTTP/1.0的情况下，因为在HTTP/1.1以后，长连接已经成为默认的选项，无需再显式指明</span></p></li><li><p><span>另一方面是服务器要支持长连接。如果服务器不支持，浏览器的长连接请求会被忽略</span></p></li></ul></li><li><p><span>长连接并非无限期的连接，除了浏览器或服务器中的一方或双方，在业务处理完毕后主动断开连接以外，闲置时间过长的连接也会被服务器强行关闭</span></p><ul><li><p><span>一方面在浏览器提交给服务器的请求包头中可以设置闲置超时</span></p></li><li><p><span>另一方面在服务器的配置文件里也可以设置默认的闲置超时</span></p></li></ul></li></ul><h2 id='48-http协议中的常用状态码都有哪些'><span>48 HTTP协议中的常用状态码都有哪些？</span></h2><ul><li><p><span>1xx：中间状态，还需后续请求</span></p><ul><li><p><span>101：切换协议</span></p></li></ul></li><li><p><span>2xx：成功</span></p><ul><li><p><span>200：成功且有响应包体</span></p></li></ul></li><li><p><span>3xx：重定向状态，还需后续请求</span></p><ul><li><p><span>301：永久重定向，会缓存</span></p></li><li><p><span>302：临时重定向，不会缓存</span></p></li><li><p><span>304：协商缓存命中</span></p></li></ul></li><li><p><span>4xx：浏览器错误</span></p><ul><li><p><span>400：请求错误</span></p></li><li><p><span>403：服务器禁止访问</span></p></li><li><p><span>404：资源未找到</span></p></li></ul></li><li><p><span>5xx：服务器错误</span></p><ul><li><p><span>500：服务器内部错误</span></p></li><li><p><span>504：服务器繁忙</span></p></li></ul></li></ul><h2 id='49-http协议中的状态码301和302有何区别'><span>49 HTTP协议中的状态码301和302有何区别？</span></h2><ul><li><p><span>在网站的日常维护中，经常需要调整页面的目录结构和存储位置，这些调整必然会导致页面地址的改变</span></p></li><li><p><span>当用户通过浏览器收藏夹或搜索引擎数据库中的旧地址请求页面时，会得到404错误，进而损失用户流量</span></p></li><li><p><span>状态码301、302旨在告诉浏览器，所访问页面已被重定向到另一个页面，浏览器进而发起对新页面的请求</span></p><ul><li><p><span>301表示永久重定向，搜索引擎会用该定向的目标地址替换源地址，源地址不复存在</span></p></li><li><p><span>302表示临时重定向，搜索引擎认为该定向的目标地址是临时性的，源地址会被保留</span></p></li></ul></li></ul><h2 id='50-forward和redirect有何区别'><span>50 Forward和Redirect有何区别？</span></h2><ul><li><p><span>Forward和Redirect是两种不同的请求转发方式</span></p><ul><li><p><span>Forward转发，即直接转发，客户机只提交一个请求，由服务器将其转发给对第二个请求的处理</span></p></li><li><p><span>Redirect转发，即间接转发，客户机先提交第一个请求，根据服务器的响应，再提交第二个请求</span></p></li></ul></li></ul><h2 id='51-cookie和session有何区别'><span>51 Cookie和Session有何区别？</span></h2><ul><li><p><span>传统意义上的HTTP协议是一个无状态的短连接协议。浏览器向服务器每次发送请求之前都要重新建立TCP连接，并在收到响应后关闭此连接。连接的生命周期仅在一次HTTP请求和一次HTTP响应之间。每一次连接续存期间所产生的内存数据，无论是在服务器侧还是浏览器侧都是不保留的。因此每一次连接都是全新的，独立的，不会带有之前任何一次连接遗留下来的状态信息</span></p></li><li><p><span>Cookie和Session都是为了解决HTTP协议无状态问题的技术手段，即设法将某次连接过程中产生的数据，延续到后续连接中继续使用</span></p><ul><li><p><span>Cookie为HTTP协议自带，不需要第三方支持，以键值对的形式，将用户名、登录时间等非敏感信息，在浏览器侧保存一段时间。在Cookie到期前，其中的信息可被用于所有与服务器之间的连接交互。但是一般来讲，浏览器都缺乏完善的保护机制，保存在浏览器侧的Cookie很容易被窃取或篡改，安全性很低</span></p></li><li><p><span>浏览器和服务器之间的多次请求、响应交互通常带有明显的业务相关性。比如在电商场景中，登录、搜索、添加购物车、下单购买、查看订单，其中的每个动作都是独立的请求、响应交互，合在一起构成一个完整的业务流程。在这样的业务流程中，通常会有很多需要在多次交互中共享的信息。这种存在业务相关性的多次交互称为一个会话，在一个会话中被多次交互共享的数据则称为Session。与Cookie不同，Session的生命期仅限于当前会话，会话结束，比如关闭浏览器，Session即被删除。Session保存在服务器侧，服务器通常具有完善的保护机制，窃取和篡改服务器上的数据会非常困难，因此Session具有更高的安全性。浏览器和HTTP协议本身并没有提供对Session的支持，需要服务器侧应用的开发者自己实现</span></p></li></ul></li><li><p><span>在服务器侧实现Session的难点在于，服务器所服务的对象通常不止一个，多个浏览器同时和服务器交互，服务器侧随时会有多个会话及与之关联的Session同时并存，那么服务器如何判定哪个Session属于哪个会话，对应哪个浏览器呢？应对这种问题，有很多方法。其中之一就是让Session和Cookie配合工作。当浏览器向服务器发送会话中的第一个请求时，服务器即为此会话生成一个键值对，保存在类似Redis这样的容器中，其中的值包含了需要在会话中被共享的数据，键经加密后作为值被放到一个Cookie中，该Cookie与响应一起返回给浏览器。浏览器从响应中提取该Cookie，保存在本地，并在后续发送请求时携带该Cookie。服务器从请求中提取该Cookie，解密其值即得到Session的键，在容器中找到与之对应的值</span></p></li></ul><h2 id='52-http和https有何区别'><span>52 HTTP和HTTPS有何区别？</span></h2><ul><li><p><span>默认端口不同</span></p><ul><li><p><span>HTTP协议默认使用80端口</span></p></li><li><p><span>HTTPS协议默认使用443端口</span></p></li></ul></li><li><p><span>费用不同</span></p><ul><li><p><span>HTTP协议本身是免费的，使用基于HTTP协议的应用，不需要为协议本身支付费用</span></p></li><li><p><span>HTTPS协议虽然也是免费的，但该协议会用到CA证书，申请证书通常需要支付费用</span></p></li></ul></li><li><p><span>开销不同</span></p><ul><li><p><span>HTTP是超文本传输协议，信息采用明文传输，系统开销较小</span></p></li><li><p><span>HTTPS是基于SSL的密文传输协议，信息加解密需要消耗更多资源</span></p></li></ul></li><li><p><span>安全性不同</span></p><ul><li><p><span>HTTP协议本身毫无安全性可言，信息在传输过程中易被窃取和篡改</span></p></li><li><p><span>HTTPS协议借助加密通信、身份认证等机制，确保信息在传输过程中的安全性</span></p></li></ul></li></ul><h2 id='53-https的握手过程是怎样的'><span>53 HTTPS的握手过程是怎样的？</span></h2><ul><li><p><span>客户机</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.025ex;"><defs><path id="MJX-69-TEX-N-2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2192" xlink:href="#MJX-69-TEX-N-2192"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">\rightarrow</script><span>服务器：所支持的最高版本、加密套件候选列表、压缩算法候选列表、一个随机数</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.719ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 760 727" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-59-TEX-I-1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D436" xlink:href="#MJX-59-TEX-I-1D436"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>C</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex">C</script><span>​、扩展信息等</span></p></li><li><p><span>服务器</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.025ex;"><defs><path id="MJX-69-TEX-N-2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2192" xlink:href="#MJX-69-TEX-N-2192"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">\rightarrow</script><span>客户机：所选择的协议版本、所选择的加密套件、所选择的压缩算法、一个随机数</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.459ex" height="1.645ex" role="img" focusable="false" viewBox="0 -705 645 727" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.05ex;"><defs><path id="MJX-61-TEX-I-1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D446" xlink:href="#MJX-61-TEX-I-1D446"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex">S</script><span>、服务器证书</span></p></li><li><p><span>客户机：验证服务器证书合法性，随机生成预密钥</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.699ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 751 683" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-66-TEX-I-1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D443" xlink:href="#MJX-66-TEX-I-1D443"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex">P</script><span>，计算得到主密钥</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="15.373ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 6794.9 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-67-TEX-I-1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path><path id="MJX-67-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-67-TEX-I-1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path><path id="MJX-67-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-67-TEX-I-1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path><path id="MJX-67-TEX-N-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path id="MJX-67-TEX-I-1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path><path id="MJX-67-TEX-I-1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJX-67-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D43E" xlink:href="#MJX-67-TEX-I-1D43E"></use></g><g data-mml-node="mo" transform="translate(1166.8,0)"><use data-c="3D" xlink:href="#MJX-67-TEX-N-3D"></use></g><g data-mml-node="mi" transform="translate(2222.6,0)"><use data-c="1D439" xlink:href="#MJX-67-TEX-I-1D439"></use></g><g data-mml-node="mo" transform="translate(2971.6,0)"><use data-c="28" xlink:href="#MJX-67-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(3360.6,0)"><use data-c="1D436" xlink:href="#MJX-67-TEX-I-1D436"></use></g><g data-mml-node="mo" transform="translate(4120.6,0)"><use data-c="2C" xlink:href="#MJX-67-TEX-N-2C"></use></g><g data-mml-node="mi" transform="translate(4565.2,0)"><use data-c="1D446" xlink:href="#MJX-67-TEX-I-1D446"></use></g><g data-mml-node="mo" transform="translate(5210.2,0)"><use data-c="2C" xlink:href="#MJX-67-TEX-N-2C"></use></g><g data-mml-node="mi" transform="translate(5654.9,0)"><use data-c="1D443" xlink:href="#MJX-67-TEX-I-1D443"></use></g><g data-mml-node="mo" transform="translate(6405.9,0)"><use data-c="29" xlink:href="#MJX-67-TEX-N-29"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>K</mi><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mi>S</mi><mo>,</mo><mi>P</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">K=F(C,S,P)</script></p></li><li><p><span>客户机</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.025ex;"><defs><path id="MJX-69-TEX-N-2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2192" xlink:href="#MJX-69-TEX-N-2192"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">\rightarrow</script><span>服务器：用服务器证书中的公钥加密预密钥</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.699ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 751 683" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-66-TEX-I-1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D443" xlink:href="#MJX-66-TEX-I-1D443"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex">P</script><span>得到的预密钥密文</span></p></li><li><p><span>服务器：用服务器证书中的私钥解密预密钥密文得到预密钥</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="1.699ex" height="1.545ex" role="img" focusable="false" viewBox="0 -683 751 683" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: 0px;"><defs><path id="MJX-66-TEX-I-1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D443" xlink:href="#MJX-66-TEX-I-1D443"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi></math></mjx-assistive-mml></mjx-container><script type="math/tex">P</script><span>，计算得到主密钥</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="15.373ex" height="2.262ex" role="img" focusable="false" viewBox="0 -750 6794.9 1000" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.566ex;"><defs><path id="MJX-67-TEX-I-1D43E" d="M285 628Q285 635 228 637Q205 637 198 638T191 647Q191 649 193 661Q199 681 203 682Q205 683 214 683H219Q260 681 355 681Q389 681 418 681T463 682T483 682Q500 682 500 674Q500 669 497 660Q496 658 496 654T495 648T493 644T490 641T486 639T479 638T470 637T456 637Q416 636 405 634T387 623L306 305Q307 305 490 449T678 597Q692 611 692 620Q692 635 667 637Q651 637 651 648Q651 650 654 662T659 677Q662 682 676 682Q680 682 711 681T791 680Q814 680 839 681T869 682Q889 682 889 672Q889 650 881 642Q878 637 862 637Q787 632 726 586Q710 576 656 534T556 455L509 418L518 396Q527 374 546 329T581 244Q656 67 661 61Q663 59 666 57Q680 47 717 46H738Q744 38 744 37T741 19Q737 6 731 0H720Q680 3 625 3Q503 3 488 0H478Q472 6 472 9T474 27Q478 40 480 43T491 46H494Q544 46 544 71Q544 75 517 141T485 216L427 354L359 301L291 248L268 155Q245 63 245 58Q245 51 253 49T303 46H334Q340 37 340 35Q340 19 333 5Q328 0 317 0Q314 0 280 1T180 2Q118 2 85 2T49 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q147 65 216 339T285 628Z"></path><path id="MJX-67-TEX-N-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path id="MJX-67-TEX-I-1D439" d="M48 1Q31 1 31 11Q31 13 34 25Q38 41 42 43T65 46Q92 46 125 49Q139 52 144 61Q146 66 215 342T285 622Q285 629 281 629Q273 632 228 634H197Q191 640 191 642T193 659Q197 676 203 680H742Q749 676 749 669Q749 664 736 557T722 447Q720 440 702 440H690Q683 445 683 453Q683 454 686 477T689 530Q689 560 682 579T663 610T626 626T575 633T503 634H480Q398 633 393 631Q388 629 386 623Q385 622 352 492L320 363H375Q378 363 398 363T426 364T448 367T472 374T489 386Q502 398 511 419T524 457T529 475Q532 480 548 480H560Q567 475 567 470Q567 467 536 339T502 207Q500 200 482 200H470Q463 206 463 212Q463 215 468 234T473 274Q473 303 453 310T364 317H309L277 190Q245 66 245 60Q245 46 334 46H359Q365 40 365 39T363 19Q359 6 353 0H336Q295 2 185 2Q120 2 86 2T48 1Z"></path><path id="MJX-67-TEX-N-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path id="MJX-67-TEX-I-1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path><path id="MJX-67-TEX-N-2C" d="M78 35T78 60T94 103T137 121Q165 121 187 96T210 8Q210 -27 201 -60T180 -117T154 -158T130 -185T117 -194Q113 -194 104 -185T95 -172Q95 -168 106 -156T131 -126T157 -76T173 -3V9L172 8Q170 7 167 6T161 3T152 1T140 0Q113 0 96 17Z"></path><path id="MJX-67-TEX-I-1D446" d="M308 24Q367 24 416 76T466 197Q466 260 414 284Q308 311 278 321T236 341Q176 383 176 462Q176 523 208 573T273 648Q302 673 343 688T407 704H418H425Q521 704 564 640Q565 640 577 653T603 682T623 704Q624 704 627 704T632 705Q645 705 645 698T617 577T585 459T569 456Q549 456 549 465Q549 471 550 475Q550 478 551 494T553 520Q553 554 544 579T526 616T501 641Q465 662 419 662Q362 662 313 616T263 510Q263 480 278 458T319 427Q323 425 389 408T456 390Q490 379 522 342T554 242Q554 216 546 186Q541 164 528 137T492 78T426 18T332 -20Q320 -22 298 -22Q199 -22 144 33L134 44L106 13Q83 -14 78 -18T65 -22Q52 -22 52 -14Q52 -11 110 221Q112 227 130 227H143Q149 221 149 216Q149 214 148 207T144 186T142 153Q144 114 160 87T203 47T255 29T308 24Z"></path><path id="MJX-67-TEX-I-1D443" d="M287 628Q287 635 230 637Q206 637 199 638T192 648Q192 649 194 659Q200 679 203 681T397 683Q587 682 600 680Q664 669 707 631T751 530Q751 453 685 389Q616 321 507 303Q500 302 402 301H307L277 182Q247 66 247 59Q247 55 248 54T255 50T272 48T305 46H336Q342 37 342 35Q342 19 335 5Q330 0 319 0Q316 0 282 1T182 2Q120 2 87 2T51 1Q33 1 33 11Q33 13 36 25Q40 41 44 43T67 46Q94 46 127 49Q141 52 146 61Q149 65 218 339T287 628ZM645 554Q645 567 643 575T634 597T609 619T560 635Q553 636 480 637Q463 637 445 637T416 636T404 636Q391 635 386 627Q384 621 367 550T332 412T314 344Q314 342 395 342H407H430Q542 342 590 392Q617 419 631 471T645 554Z"></path><path id="MJX-67-TEX-N-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><use data-c="1D43E" xlink:href="#MJX-67-TEX-I-1D43E"></use></g><g data-mml-node="mo" transform="translate(1166.8,0)"><use data-c="3D" xlink:href="#MJX-67-TEX-N-3D"></use></g><g data-mml-node="mi" transform="translate(2222.6,0)"><use data-c="1D439" xlink:href="#MJX-67-TEX-I-1D439"></use></g><g data-mml-node="mo" transform="translate(2971.6,0)"><use data-c="28" xlink:href="#MJX-67-TEX-N-28"></use></g><g data-mml-node="mi" transform="translate(3360.6,0)"><use data-c="1D436" xlink:href="#MJX-67-TEX-I-1D436"></use></g><g data-mml-node="mo" transform="translate(4120.6,0)"><use data-c="2C" xlink:href="#MJX-67-TEX-N-2C"></use></g><g data-mml-node="mi" transform="translate(4565.2,0)"><use data-c="1D446" xlink:href="#MJX-67-TEX-I-1D446"></use></g><g data-mml-node="mo" transform="translate(5210.2,0)"><use data-c="2C" xlink:href="#MJX-67-TEX-N-2C"></use></g><g data-mml-node="mi" transform="translate(5654.9,0)"><use data-c="1D443" xlink:href="#MJX-67-TEX-I-1D443"></use></g><g data-mml-node="mo" transform="translate(6405.9,0)"><use data-c="29" xlink:href="#MJX-67-TEX-N-29"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>K</mi><mo>=</mo><mi>F</mi><mo stretchy="false">(</mo><mi>C</mi><mo>,</mo><mi>S</mi><mo>,</mo><mi>P</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">K=F(C,S,P)</script></p></li><li><p><span>客户机</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.025ex;"><defs><path id="MJX-69-TEX-N-2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2192" xlink:href="#MJX-69-TEX-N-2192"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">\rightarrow</script><span>服务器：所有发送给服务器的信息的哈希值，经主密钥加密后的密文</span></p></li><li><p><span>服务器：将密文经主密钥解密后得到明文，验证其是否与所有接收自客户机的信息的哈希值一致</span></p></li><li><p><span>服务器</span><mjx-container class="MathJax" jax="SVG" style="position: relative;"><svg xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="1.181ex" role="img" focusable="false" viewBox="0 -511 1000 522" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="vertical-align: -0.025ex;"><defs><path id="MJX-69-TEX-N-2192" d="M56 237T56 250T70 270H835Q719 357 692 493Q692 494 692 496T691 499Q691 511 708 511H711Q720 511 723 510T729 506T732 497T735 481T743 456Q765 389 816 336T935 261Q944 258 944 250Q944 244 939 241T915 231T877 212Q836 186 806 152T761 85T740 35T732 4Q730 -6 727 -8T711 -11Q691 -11 691 0Q691 7 696 25Q728 151 835 230H70Q56 237 56 250Z"></path></defs><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><use data-c="2192" xlink:href="#MJX-69-TEX-N-2192"></use></g></g></g></svg><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">→</mo></math></mjx-assistive-mml></mjx-container><script type="math/tex">\rightarrow</script><span>客户机：所有发送给客户机的信息的哈希值，经主密钥加密后的密文</span></p></li><li><p><span>客户机：将密文经主密钥解密后得到明文，验证其是否与所有接收自服务器的信息的哈希值一致</span></p></li><li><p><span>客户机和服务器：握手完成，使用主密钥加解密后续通信内容</span></p></li></ul><h2 id='54-https都有哪些的优点和缺点'><span>54 HTTPS都有哪些的优点和缺点？</span></h2><ul><li><p><span>HTTPS的优点</span></p><ul><li><p><span>支持对客户机和服务器的双向认证，确保数据总是被可信任的接收者接收</span></p></li><li><p><span>对通信数据采用加密传输，防止数据被窃取和篡改，确保数据的完整性</span></p></li><li><p><span>虽然无法做到绝对安全，但会大幅提高攻击者的攻击成本</span></p></li></ul></li><li><p><span>HTTPS的缺点</span></p><ul><li><p><span>握手阶段比较费时，页面加载时间增加50%，耗电量增加10%~20%</span></p></li><li><p><span>对通信内容的加解密会增加运行开销和功耗，已有的安全措施也会因此受到影响</span></p></li><li><p><span>SSL证书通常都不是免费的，功能越强的证书费用往往也越高</span></p></li><li><p><span>SSL证书通常都是与IP绑定的，因此无法在同一个IP上使用多个域名，进一步增加对IPv4的资源消耗</span></p></li><li><p><span>SSL证书的信用链并不完整，在某些国家可以控制根证书的情况下，中间人攻击一样可行</span></p></li><li><p><span>基于加密的信息安全作用有限，对拒绝服务、服务器劫持等攻击手段，起不到任何作用</span></p></li></ul></li></ul><h2 id='55-什么是数字签名'><span>55 什么是数字签名？</span></h2><ul><li><p><span>数字签名的作用有两个</span></p><ul><li><p><span>让接收方能够确认所收到的信息来自可信任的发送方</span></p></li><li><p><span>让接收方能够确认所收到的信息没有在传递过程中被篡改</span></p></li></ul></li><li><p><span>发送方做签名：先计算信息的数字摘要，然后用私钥对数字摘要做加密，得到数字签名与信息一起发送</span></p></li><li><p><span>接收方做验签：先计算信息的数字摘要，然后用公钥对数字签名做解密，检验解密所得与摘要是否一致</span></p></li><li><p><span>合法性理由</span></p><ul><li><p><span>假设信息并非来自可信发送方，用可信发送方的公钥不可能解密出数字摘要</span></p></li><li><p><span>假设信息在传输过程中被篡改，计算出的数字摘要不可能与解密所得相一致</span></p></li></ul></li></ul><h2 id='56-什么是数字证书'><span>56 什么是数字证书？</span></h2><ul><li><p><span>数字证书是用于保存公私密钥对的电子文件</span></p></li><li><p><span>加密时接收方将自己的数字证书交给发送方</span></p><ul><li><p><span>发送方先用对称密钥加密数字内容，得到内容密文，再用数字证书中的公钥加密对称密钥，得到密钥密文</span></p></li><li><p><span>接收方先用数字证书中的私钥解密密钥密文，得到对称密钥，再用对称密钥解密内容密文，得到数字内容</span></p></li></ul></li><li><p><span>签名时发送方将自己的数字证书交给接收方</span></p><ul><li><p><span>发送方先计算信息的数字摘要，然后用数字证书中的私钥对数字摘要做加密，得到数字签名</span></p></li><li><p><span>接收方先计算信息的数字摘要，然后用数字证书中的公钥对数字签名做解密，比对数字摘要</span></p></li></ul></li><li><p><span>除公私密钥对外，数字证书中还包含证书指纹、证书有效期、证书持有者和颁发机构信息等内容</span></p></li></ul><h2 id='57-从在浏览器地址栏里输入url到显示出页面内容都经历了怎样的过程'><span>57 从在浏览器地址栏里输入URL到显示出页面内容都经历了怎样的过程？</span></h2><ul><li><p><span>域名解析：依次查询浏览器自身的域名缓存、操作系统的域名缓存、本地Host文件、本地域名服务器等，获得目的主机的IP地址</span></p></li><li><p><span>建立连接：根据目的主机的IP地址，结合默认或指定的端口号，建立与目的主机的TCP连接</span></p></li><li><p><span>发送请求：通过已建立的连接，向目的主机发送HTTP请求</span></p></li><li><p><span>接收响应：通过已建立的连接，从目的主机接收HTTP响应</span></p></li><li><p><span>解析渲染：解析收到的HTTP响应，渲染页面内容</span></p></li><li><p><span>断开连接：若采用短连接模式，则断开与目的主机的连接，否则保持该连接</span></p></li></ul><h2 id='58-dns的解析过程是怎样的'><span>58 DNS的解析过程是怎样的？</span></h2><ul><li><p><span>本地域名服务器先查询存储在本地的域名资源</span></p><ul><li><p><span>要么返回查询到的IP地址</span></p></li><li><p><span>要么向根域名服务器发出查询请求</span></p></li></ul></li><li><p><span>根域名服务器先查询存储在本地的域名资源</span></p><ul><li><p><span>要么返回查询到的IP地址</span></p></li><li><p><span>要么返回某个顶级域名服务器的IP地址</span></p></li></ul></li><li><p><span>顶级域名服务器先查询存储在本地的域名资源</span></p><ul><li><p><span>要么返回查询到的IP地址</span></p></li><li><p><span>要么返回某个权限域名服务器的IP地址</span></p></li></ul></li><li><p><span>以此类推，最后本地域名服务器，向浏览器返回目的主机的IP地址，或报告错误</span></p></li></ul><h2 id='59-什么是域名缓存'><span>59 什么是域名缓存？</span></h2><ul><li><p><span>无论是本地域名服务器还是主机，都会将最近查询过的域名保存在高速缓存中，以缩短响应时间，减轻域名服务器的负荷，降低互联网上域名查询报文的数量</span></p></li><li><p><span>域名缓存中的每条域名信息都有一个生存时间，超过生存时间的域名信息会从缓存中被删除。生存时间越长，网络开销越小，生存时间越短，域名解析的正确率越高</span></p></li><li><p><span>主机甚至可以在启动时，将本地域名服务器的域名数据库直接下载到域名缓存中，并对缓存中的域名信息定期维护，添加新增的域名信息，删除失效的域名信息</span></p></li><li><p><span>域名的变动并不频繁，域名缓存中的域名信息，在多数时间内都是有效的</span></p></li></ul><h2 id='60-什么是sql注入'><span>60 什么是SQL注入？</span></h2><ul><li><p><span>SQL注入是一种常见的Web攻击方式，其主要形式是借由用户的输入，将一段恶意代码串联到SQL语句中，以达到执行非预期命令或访问未授权数据的目的</span></p></li><li><p><span>例如，有这样一条SQL语句：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="sql"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="sql"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">SELECT</span> <span class="cm-operator">*</span> <span class="cm-keyword">FROM</span> users <span class="cm-keyword">WHERE</span> user_id <span class="cm-operator">=</span> $user_id<span class="cm-punctuation">;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>其中，user_id来自用户的输入，如果输入“1234; DELETE FROM users”，则最终的SQL语句变为：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="sql"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="sql"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">SELECT</span> <span class="cm-operator">*</span> <span class="cm-keyword">FROM</span> users <span class="cm-keyword">WHERE</span> user_id <span class="cm-operator">=</span> <span class="cm-number">1234</span><span class="cm-punctuation">;</span> <span class="cm-keyword">DELETE</span> <span class="cm-keyword">FROM</span> users<span class="cm-punctuation">;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>执行以上语句，会删除users表中的所有数据</span></p></li><li><p><span>又如，有这样一条SQL语句：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="sql"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="sql"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">SELECT</span> <span class="cm-operator">*</span> <span class="cm-keyword">FROM</span> users <span class="cm-keyword">WHERE</span> user_id <span class="cm-operator">=</span> $user_id <span class="cm-keyword">AND</span> <span class="cm-keyword">password</span> <span class="cm-operator">=</span> $password<span class="cm-punctuation">;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>其中，user_id和password来自用户的输入，如果输入“&#39;&#39; OR 1 = 1 --”和“&#39;&#39;”，则最终的SQL语句变为：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="sql"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="sql"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-keyword">SELECT</span> <span class="cm-operator">*</span> <span class="cm-keyword">FROM</span> users <span class="cm-keyword">WHERE</span> user_id <span class="cm-operator">=</span> <span class="cm-string">''</span> <span class="cm-keyword">OR</span> <span class="cm-number">1</span> <span class="cm-operator">=</span> <span class="cm-number">1</span> <span class="cm-comment">-- AND password = '';</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>“user_id = &#39;&#39; OR 1 = 1”恒为真，后面的“--”表示注释，该语句总能查询到结果，轻易地骗过系统，取得合法身份</span></p></li><li><p><span>针对SQL注入攻击的最有效的防范手段，就是使用SQL预编译和参数绑定技术。攻击者的恶意代码，只会被当做SQL语句的参数，而非SQL命令的一部分，这样的代码是不会被执行的</span></p></li></ul><h2 id='61-什么是xss攻击'><span>61 什么是XSS攻击？</span></h2><ul><li><p><span>XSS是除SQL注入以外，另一种主流的Web攻击方式，其原理是通过用户提交的数据，将恶意代码嵌入到Web页面中，当这些代码被执行时，将可能盗取用户资料，假借用户身份执行某种操作，或令用户系统感染病毒等</span></p></li><li><p><span>例如，有这样一行URL字符串：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">http://www.test.com/message.php?send=Hello,World!</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>访问该URL将得到一段HTML文本，浏览器渲染该文本的结果是显示“Hello,World!”字符串。攻击者将这行URL字符串篡改成下面这样：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang=""><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang=""><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;">http://www.test.com/message.php?send=&lt;script&gt;alert('You are foolish!')&lt;/script&gt;</span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>访问该URL将得到一段HTML文本，其中包含一段JavaScript脚本，浏览器在渲染页面时会执行这段脚本</span></p></li><li><p><span>又如，页面中的表单域：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="html"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="html"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">input</span> <span class="cm-attribute">type</span>=<span class="cm-string">"text"</span> <span class="cm-attribute">name</span>=<span class="cm-string">"content"</span> <span class="cm-attribute">value</span>=<span class="cm-string">"填写内容"</span> <span class="cm-tag cm-bracket">/&gt;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>将表单提交到服务器后，用户填写的内容将被保存到数据库中，而如果用户填写的是一段脚本代码：</span></p><pre class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" spellcheck="false" lang="html"><div class="CodeMirror cm-s-inner cm-s-null-scroll CodeMirror-wrap" lang="html"><div style="overflow: hidden; position: relative; width: 3px; height: 0px; top: 9.51982px; left: 35.9881px;"><textarea autocorrect="off" autocapitalize="off" spellcheck="false" tabindex="0" style="position: absolute; bottom: -1em; padding: 0px; width: 1000px; height: 1em; outline: none;"></textarea></div><div class="CodeMirror-scrollbar-filler" cm-not-content="true"></div><div class="CodeMirror-gutter-filler" cm-not-content="true"></div><div class="CodeMirror-scroll" tabindex="-1"><div class="CodeMirror-sizer" style="margin-left: 28px; margin-bottom: 0px; border-right-width: 0px; padding-right: 0px; padding-bottom: 0px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-lines" role="presentation"><div role="presentation" style="position: relative; outline: none;"><div class="CodeMirror-measure"><pre><span>xxxxxxxxxx</span></pre><div class="CodeMirror-linenumber CodeMirror-gutter-elt"><div>1</div></div></div><div class="CodeMirror-measure"></div><div style="position: relative; z-index: 1;"></div><div class="CodeMirror-code" role="presentation"><div class="CodeMirror-activeline" style="position: relative;"><div class="CodeMirror-activeline-background CodeMirror-linebackground"></div><div class="CodeMirror-gutter-background CodeMirror-activeline-gutter" style="left: -27.9948px; width: 28px;"></div><div class="CodeMirror-gutter-wrapper CodeMirror-activeline-gutter" style="left: -27.9948px;"><div class="CodeMirror-linenumber CodeMirror-gutter-elt CodeMirror-linenumber-show" style="left: 0px; width: 19px;">1</div></div><pre class=" CodeMirror-line " role="presentation"><span role="presentation" style="padding-right: 0.1px;"><span class="cm-tag cm-bracket">&lt;</span><span class="cm-tag">script</span><span class="cm-tag cm-bracket">&gt;</span><span class="cm-variable">alert</span>(<span class="cm-string">'You are foolish!'</span>)<span class="cm-tag cm-bracket">&lt;/</span><span class="cm-tag">script</span><span class="cm-tag cm-bracket">&gt;</span></span></pre></div></div></div></div></div></div><div style="position: absolute; height: 0px; width: 1px; border-bottom: 0px solid transparent; top: 23px;"></div><div class="CodeMirror-gutters" style="height: 23px;"><div class="CodeMirror-gutter CodeMirror-linenumbers" style="width: 27px;"></div></div></div></div></pre><p><span>这段代码将也被保存到数据库中，并在显示查询结果的页面中被执行</span></p></li><li><p><span>XSS攻击的根本原因，就是过于相信客户端提交的数据，不做任何检查和过滤</span></p></li><li><p><span>防范XSS攻击的核心就是永远不要轻信客户端提交的数据</span></p><ul><li><p><span>将重要的Cookie标记为HttpOnly，这样JavaScript中的document.cookie语句就无法获取Cookie了</span></p></li><li><p><span>显式规定表单中各字段的数据类型，比如用户名必须是字母或数字的组合，不能是其它</span></p></li><li><p><span>从客户端提交的数据中过滤掉“</span><span>&lt;</span><span>script</span><span>&gt;</span><span>”之类的特殊标签</span></p></li></ul></li></ul></div></div>
+</body>
+</html>

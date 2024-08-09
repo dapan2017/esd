@@ -1,7 +1,7 @@
 // 存储服务器
 // 实现业务服务类
 //
-#include <linux/limits.h>
+#include <limits.h>
 #include <algorithm>
 #include "02_proto.h"
 #include "03_util.h"
@@ -175,7 +175,7 @@ bool service_c::filesize(acl::socket_stream* conn,
     // 构造响应
     bodylen = BODYLEN_SIZE;
     long long resplen = HEADLEN + bodylen;
-    char resp[resplen] = {};
+    char* resp = new char[resplen];
     llton(bodylen, resp);
     resp[BODYLEN_SIZE] = CMD_STORAGE_REPLY;
     resp[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -187,7 +187,7 @@ bool service_c::filesize(acl::socket_stream* conn,
             acl::last_serror(), resplen, conn->get_peer());
         return false;
     }
-
+    delete[] resp;
     return true;
 }
 
@@ -451,7 +451,6 @@ int service_c::save(acl::socket_stream* conn, char const* appid,
 
     return OK;
 }
-
 // 读取并发送文件
 int service_c::send(acl::socket_stream* conn, char const* filepath,
     long long offset, long long size) const {
@@ -472,7 +471,7 @@ int service_c::send(acl::socket_stream* conn, char const* filepath,
     // 构造响应头
     long long bodylen = size;
     long long headlen = HEADLEN;
-    char head[headlen] = {};
+    char* head = new char[headlen];
     llton(bodylen, head);
     head[BODYLEN_SIZE] = CMD_STORAGE_REPLY;
     head[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -508,7 +507,7 @@ int service_c::send(acl::socket_stream* conn, char const* filepath,
 
     // 关闭文件
     file.close();
-
+    delete[] head;
     return OK;
 }
 
@@ -521,7 +520,7 @@ bool service_c::ok(acl::socket_stream* conn) const {
     // 构造响应
     long long bodylen = 0;
     long long resplen = HEADLEN + bodylen;
-    char resp[resplen] = {};
+    char* resp = new char[resplen];
     llton(bodylen, resp);
     resp[BODYLEN_SIZE] = CMD_STORAGE_REPLY;
     resp[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -532,7 +531,7 @@ bool service_c::ok(acl::socket_stream* conn) const {
             acl::last_serror(), resplen, conn->get_peer());
         return false;
     }
-
+    delete[] resp;
     return true;
 }
 
@@ -558,7 +557,7 @@ bool service_c::error(acl::socket_stream* conn, short errnumb,
     // 构造响应
     long long bodylen = ERROR_NUMB_SIZE + desclen;
     long long resplen = HEADLEN + bodylen;
-    char resp[resplen] = {};
+    char* resp = new char[resplen];
     llton(bodylen, resp);
     resp[BODYLEN_SIZE] = CMD_STORAGE_REPLY;
     resp[BODYLEN_SIZE+COMMAND_SIZE] = STATUS_ERROR;
@@ -572,6 +571,6 @@ bool service_c::error(acl::socket_stream* conn, short errnumb,
             acl::last_serror(), resplen, conn->get_peer());
         return false;
     }
-
+    delete[] resp;
     return true;
 }

@@ -64,7 +64,7 @@ int tracker_c::join(acl::socket_stream* conn) const {
     // 构造请求
     long long bodylen = sizeof(storage_join_body_t);
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     llton(bodylen, requ);
     requ[BODYLEN_SIZE] = CMD_TRACKER_JOIN;
     requ[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -137,6 +137,8 @@ int tracker_c::join(acl::socket_stream* conn) const {
 
     logger_error("join fail, errnumb: %d, errdesc: %s",
         errnumb, errdesc);
+
+    delete[] requ;
     return ERROR;
 }
 
@@ -147,7 +149,7 @@ int tracker_c::beat(acl::socket_stream* conn) const {
     // 构造请求
     long long bodylen = sizeof(storage_beat_body_t);
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     llton(bodylen, requ);
     requ[BODYLEN_SIZE] = CMD_TRACKER_BEAT;
     requ[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -216,5 +218,7 @@ int tracker_c::beat(acl::socket_stream* conn) const {
 
     logger_error("beat fail, errnumb: %d, errdesc: %s",
         errnumb, errdesc);
+
+    delete[] requ;
     return ERROR;
 }

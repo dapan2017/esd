@@ -1,7 +1,10 @@
 // 客户机
 // 实现连接类
 //
-#include <sys/sendfile.h>
+// #include <sys/sendfile.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/uio.h>
 #include <lib_acl.h>
 #include "02_proto.h"
 #include "03_util.h"
@@ -33,7 +36,7 @@ int conn_c::saddrs(char const* appid, char const* userid,
     // 构造请求
     long long bodylen = APPID_SIZE + USERID_SIZE + FILEID_SIZE;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     if (makerequ(CMD_TRACKER_SADDRS,
         appid, userid, fileid, requ) != OK)
         return ERROR;
@@ -76,7 +79,7 @@ int conn_c::saddrs(char const* appid, char const* userid,
         free(body);
         body = NULL;
     }
-
+    delete[] requ;
     return result;
 }
 
@@ -87,7 +90,7 @@ int conn_c::groups(std::string& groups) {
     // 构造请求
     long long bodylen = 0;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     llton(bodylen, requ);
     requ[BODYLEN_SIZE] = CMD_TRACKER_GROUPS;
     requ[BODYLEN_SIZE+COMMAND_SIZE] = 0;
@@ -142,7 +145,7 @@ int conn_c::upload(char const* appid, char const* userid,
     long long bodylen = APPID_SIZE + USERID_SIZE + FILEID_SIZE +
         BODYLEN_SIZE;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     if (makerequ(CMD_STORAGE_UPLOAD,
         appid, userid, fileid, requ) != OK)
         return ERROR;
@@ -216,6 +219,7 @@ int conn_c::upload(char const* appid, char const* userid,
         body = NULL;
     }
 
+    delete[] requ;
     return result;
 }
 
@@ -228,7 +232,7 @@ int conn_c::upload(char const* appid, char const* userid,
     long long bodylen = APPID_SIZE + USERID_SIZE + FILEID_SIZE +
         BODYLEN_SIZE;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     if (makerequ(CMD_STORAGE_UPLOAD,
         appid, userid, fileid, requ) != OK)
         return ERROR;
@@ -293,7 +297,7 @@ int conn_c::filesize(char const* appid, char const* userid,
     // 构造请求
     long long bodylen = APPID_SIZE + USERID_SIZE + FILEID_SIZE;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     if (makerequ(CMD_STORAGE_FILESIZE,
         appid, userid, fileid, requ) != OK)
         return ERROR;
@@ -336,7 +340,7 @@ int conn_c::filesize(char const* appid, char const* userid,
         free(body);
         body = NULL;
     }
-
+    delete[] requ;
     return result;
 }
 
@@ -350,7 +354,7 @@ int conn_c::download(char const* appid, char const* userid,
     long long bodylen = APPID_SIZE + USERID_SIZE + FILEID_SIZE +
         BODYLEN_SIZE + BODYLEN_SIZE;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     if (makerequ(CMD_STORAGE_DOWNLOAD,
         appid, userid, fileid, requ) != OK)
         return ERROR;
@@ -400,7 +404,7 @@ int conn_c::download(char const* appid, char const* userid,
         free(body);
         body = NULL;
     }
-
+    delete[] requ;
     return result;
 }
 
@@ -412,7 +416,7 @@ int conn_c::del(char const* appid, char const* userid,
     // 构造请求
     long long bodylen = APPID_SIZE + USERID_SIZE + FILEID_SIZE;
     long long requlen = HEADLEN + bodylen;
-    char requ[requlen] = {};
+    char* requ = new char[requlen];
     if (makerequ(CMD_STORAGE_DELETE,
         appid, userid, fileid, requ) != OK)
         return ERROR;
@@ -451,7 +455,7 @@ int conn_c::del(char const* appid, char const* userid,
         free(body);
         body = NULL;
     }
-
+    delete[] requ;
     return result;
 }
 
